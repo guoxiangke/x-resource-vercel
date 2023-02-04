@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/resources/{keyword}', function (Request $request){
+    // dd($request->keyword);
+    $resource = app("App\Services\Resource");
+    return $resource->__invoke($request->keyword);
+})->where('keyword', '.*');
