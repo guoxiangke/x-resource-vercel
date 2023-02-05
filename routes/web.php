@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +17,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/cache', function (){
+    $cacheKey = 'cacheKey';
+    $data = Cache::get($cacheKey, strtotime('tomorrow') - time());
+    Cache::put($cacheKey, $data, strtotime('tomorrow') - time());
+    return [$data];
 });
 
 Route::get('/resources/{keyword}', function ($keyword){
