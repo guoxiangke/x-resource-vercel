@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/resources/{keyword}', function ($keyword){
+    $resource = app("App\Services\Resource");
+    return $resource->__invoke($keyword);
+})->where('keyword', '.*');
