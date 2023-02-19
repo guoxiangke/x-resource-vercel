@@ -77,15 +77,6 @@ final class Zenai {
 
                 $code = $res['code'];
                 $mp3Code = $res['code'];
-                if($code == 'tltl'){
-                    $weekCode=['ht',1,'tl','ms','pc','sp','gr'];//0-6
-                    // 20220910
-                    $d = \DateTime::createFromFormat('Ymd', $jdata['time']);
-                    $dayOfWeek = $d->format('w');
-                    if($dayOfWeek == 1) return;//周一没有
-                    $mp3Code = 'tl' . $weekCode[$dayOfWeek];
-                }
-
                 $image = "https://d33tzbj8j46khy.cloudfront.net/{$code}.png";
                 $codeStr = "/{$code}/$mp3Code" . substr($jdata['time'], 2);
                 $mp3Domain = 'd20j6nxnxd2c4l';//depk9mke9ym92
