@@ -16,13 +16,14 @@ use Illuminate\Support\Facades\Log;
 */
 
 Route::get('/', function () {
+
     return view('welcome');
 });
 
 Route::get('/cache', function (){
     $cacheKey = 'cacheKey';
-    $data = Cache::get($cacheKey, strtotime('tomorrow') - time());
-    Cache::put($cacheKey, $data, strtotime('tomorrow') - time());
+    $data = Cache::store('redis')->get($cacheKey, strtotime('tomorrow') - time());
+    Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
     return [$data];
 });
 
