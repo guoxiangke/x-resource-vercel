@@ -21,7 +21,7 @@ final class Music{
             );
             $name = trim($name);
             $cacheKey = "xbot.keyword.163.{$name}";
-            $data = Cache::get($cacheKey, false);
+            $data = Cache::store('redis')->get($cacheKey, false);
             if(!$data) {
                 $api = new Meting('netease');
                 $data = json_decode($api->format(true)->search($name), 1);
@@ -32,7 +32,7 @@ final class Music{
                     'title' => $name,
                     'description' => "来自网易云音乐",
                 ];
-                Cache::put($cacheKey, $data);
+                Cache::store('redis')->put($cacheKey, $data);
             }
             return [
                 "type" => "music",

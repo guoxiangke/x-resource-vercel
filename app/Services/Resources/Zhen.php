@@ -21,7 +21,7 @@ final class Zhen{
         if($keyword == '789'){
             $cacheKey = "xbot.keyword.".$keyword;
 
-            $data = Cache::get($cacheKey, false);
+            $data = Cache::store('redis')->get($cacheKey, false);
 
             if(!$data){
                 $url = now()->format('/Y/m/');
@@ -80,7 +80,7 @@ final class Zhen{
                 if(date('w')==0 || date('w')==6){
                     $data = $additionc;
                 }
-                Cache::put($cacheKey, $data, strtotime('tomorrow') - time());
+                Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
             }
 
             return $data;
@@ -93,11 +93,11 @@ final class Zhen{
 
             $url = 'https://www.tpehoc.org.tw'.$url;
             $cacheKey = "xbot.keyword.".$keyword;
-            $data = Cache::get($cacheKey, false);
+            $data = Cache::store('redis')->get($cacheKey, false);
 
             if(!$data){
                 $client = new Client();
-                $response = $client->get($url);
+                $response = $client->get($url);//,['proxy' => 'socks5://54.176.71.221:8011']
                 $html = (string)$response->getBody();
                 $htmlTmp = HtmlDomParser::str_get_html($html);
                 $mp3 =  $htmlTmp->findOne('.wp-audio-shortcode source')->getAttribute('src');
@@ -126,7 +126,7 @@ final class Zhen{
                     ],
                     'addition'=>$addition,
                 ];
-                Cache::put($cacheKey, $data, strtotime('tomorrow') - time());
+                Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
             }
             return $data;
         }

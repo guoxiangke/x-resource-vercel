@@ -15,7 +15,7 @@ final class Miniature{
         if($keyword == "miniature"){
             $date = date('ymd');
             $cacheKey = "xbot.keyword.miniature";
-            $data = Cache::get($cacheKey, false);
+            $data = Cache::store('redis')->get($cacheKey, false);
             if(!$data){
                 // https://miniature-calendar.com/221003
                 $response = Http::get("https://miniature-calendar.com/{$date}");
@@ -29,7 +29,7 @@ final class Miniature{
                     'title' => "【miniature】{$date}",
                     'description' => '每日一图',
                 ];
-                Cache::put($cacheKey, $data, strtotime('tomorrow') - time());
+                Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
             }
             return [
                 'type' => 'image',

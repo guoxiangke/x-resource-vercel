@@ -14,7 +14,7 @@ final class Wallstreetcn{
         if($keyword == "华尔街见闻早餐"){
             $date = date('ymd');
             $cacheKey = "xbot.keyword.Wallstreetcn";
-            $data = Cache::get($cacheKey, false);
+            $data = Cache::store('redis')->get($cacheKey, false);
             if(!$data){
                 $response = Http::get("https://api-one-wscn.awtmt.com/apiv1/search/article?query=华尔街见闻早餐&cursor=&limit=1&vip_type=");
                 $json =$response->json();
@@ -37,7 +37,7 @@ final class Wallstreetcn{
                     'title' => $title,
                     'description' => $desc,
                 ];
-                Cache::put($cacheKey, $data, strtotime('tomorrow') - time());
+                Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
             }
             return [
                 'type' => 'music',

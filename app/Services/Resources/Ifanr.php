@@ -15,7 +15,7 @@ final class Ifanr{
         if($keyword == "ifanr"){
             $date = date('ymd');
             $cacheKey = "xbot.keyword.ifanr";
-            $data = Cache::get($cacheKey, false);
+            $data = Cache::store('redis')->get($cacheKey, false);
             if(!$data){
                 
                 $response = Http::get("https://sso.ifanr.com/api/v5/wp/article/?post_category=早报&position=ifr_fourth_cards_layout");
@@ -35,7 +35,7 @@ final class Ifanr{
                     'title' => "【ifanr】{$title}",
                     'description' => $description,
                 ];
-                Cache::put($cacheKey, $data, strtotime('tomorrow') - time());
+                Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
             }
             return [
                 'type' => 'link',

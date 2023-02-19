@@ -25,7 +25,7 @@ final class Bible{
         }
         if(in_array($keyword, $titles) || $continue == true){
             $cacheKey = "xbot.keyword.bible.".$keyword;
-            $data = Cache::get($cacheKey, false);
+            $data = Cache::store('redis')->get($cacheKey, false);
             if(!$data){
                 // $response = Http::get("https://www.biblegateway.com/audio/bible_data/?osis=Gen.2&version=ccb&author=biblica");
                 // $json = $response->json();
@@ -83,7 +83,7 @@ final class Bible{
                     ];
                     $data = array_merge($data,['addition'=>$addition]);
                 }
-                Cache::put($cacheKey, $data, strtotime('tomorrow') - time());
+                Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
                 return $data;
             }
             return $data;

@@ -15,7 +15,7 @@ final class ChineseToday{
         if($keyword == "每日箴言"){
             $date = date('ymd');
             $cacheKey = "xbot.keyword.ChineseToday";
-            $data = Cache::get($cacheKey, false);
+            $data = Cache::store('redis')->get($cacheKey, false);
             if(!$data){
                 // http://chinesetodays.org/sites/default/files/devotion_audio/2017c/220127.mp3
                 $response = Http::get("https://seekinggod.cn/ct{$date}");
@@ -29,7 +29,7 @@ final class ChineseToday{
                     'title' => "【每日箴言】{$date}",
                     'description' => $title,
                 ];
-                Cache::put($cacheKey, $data, strtotime('tomorrow') - time());
+                Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
             }
             return [
                 'type' => 'music',

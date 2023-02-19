@@ -17,7 +17,7 @@ final class Kr{
         if($keyword == "8点1氪"){
             $date = date('ymd');
             $cacheKey = "xbot.keyword.kr";
-            $data = Cache::get($cacheKey, false);
+            $data = Cache::store('redis')->get($cacheKey, false);
             if(!$data){
                 
                 $client = new Client();
@@ -46,7 +46,7 @@ final class Kr{
                     'title' => "【8点1氪】{$date}",
                     'description' => $title,
                 ];
-                Cache::put($cacheKey, $data, strtotime('tomorrow') - time());
+                Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
             }
             return [
                 'type' => 'music',

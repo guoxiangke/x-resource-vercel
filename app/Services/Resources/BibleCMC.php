@@ -20,7 +20,7 @@ final class BibleCMC{
         	$offset = (int)filter_var(str_replace('cmcn', '',$keyword), FILTER_SANITIZE_NUMBER_INT);
             $offset = abs((date('z')-$offset))%244;
             $cacheKey = "xbot.keyword.cmcn.".$offset;
-            $data = Cache::get($cacheKey, false);
+            $data = Cache::store('redis')->get($cacheKey, false);
 
             // //jQuery('.entry-content>p span a').each(function(){console.log(jQuery(this).attr('href').replace('http://cmcbiblereading.com/',''));})
 			$new244 = [
@@ -296,7 +296,7 @@ final class BibleCMC{
                 ];
 
 
-                Cache::put($cacheKey, $data, strtotime('tomorrow') - time());
+                Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
             }
             return $data;
         }
@@ -305,7 +305,7 @@ final class BibleCMC{
         	$offset = (int)filter_var(str_replace('cmco', '',$keyword), FILTER_SANITIZE_NUMBER_INT);
             $offset = abs((date('z')-$offset))%929;
             $cacheKey = "xbot.keyword.cmco.".$offset;
-            $data = Cache::get($cacheKey, false);
+            $data = Cache::store('redis')->get($cacheKey, false);
 			$old930=[
 				'2015/01/26/创世记第1章逐节注解、祷读/',
 				'2015/01/26/创世记第2章逐节注解、祷读',
@@ -1263,7 +1263,7 @@ final class BibleCMC{
                 	'addition' => $addition
                 ];
 
-                Cache::put($cacheKey, $data, strtotime('tomorrow') - time());
+                Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
             }
             return $data;
         }

@@ -21,7 +21,7 @@ final class Zan{
             );
             $name = trim($name);
             $cacheKey = "xbot.keyword.zmsg.{$name}";
-            $data = Cache::get($cacheKey, false);
+            $data = Cache::store('redis')->get($cacheKey, false);
             if(!$data){
                 $url = "https://www.zanmeishige.com/search/song/{$name}";
                 $response = Http::get($url);
@@ -79,7 +79,7 @@ final class Zan{
                     'description' => $description,
                 ];
 
-                Cache::put($cacheKey, $data);
+                Cache::store('redis')->put($cacheKey, $data);
             }
             return [
                 "type"=>"music",

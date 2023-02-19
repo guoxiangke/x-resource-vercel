@@ -65,7 +65,7 @@ final class Zenai {
 
         if(in_array($keyword, array_keys($res))){
             $cacheKey = "xbot.700.{$keyword}";
-            $data = Cache::get($cacheKey, false);
+            $data = Cache::store('redis')->get($cacheKey, false);
             if($data) return $data;
 
             if(!$data){
@@ -118,10 +118,10 @@ final class Zenai {
                         ],
                     ];
                     $data = array_merge($data,['addition'=>$addition]);
-                    Cache::put($cacheKey, $data, strtotime('tomorrow') - time());
+                    Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
                     return $data;
                 }
-                Cache::put($cacheKey, $data, strtotime('tomorrow') - time());
+                Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
                 return $data;
             }
         }
