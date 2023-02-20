@@ -26,7 +26,7 @@ final class LyAudio{
         $map = array_flip([601 => "ib",602 => 'fa',603 => "cc",604 => "se",605 => "gg",606 => "up",607 => 'bx',608 => 'pp',609 => '',610 => "hp",611 => "sa",612 => "bc",613 => "ir",614 => "rt",615 => '',616 => "ws",617 => '',618 => "dy",619 => "ee",620 => "mw",621 => "be",622 => "bs",623 => "cw",624 => "dr",625 => "th",626 => "wr",627 => "yy",628 => "aw",629 => "yp",630 => "mg",631 => '',632 => "",633 => '',634 => "",635 => '',636 => '',637 => '',638 => '',639 => '',640 => "mpa",641 => "ltsnp",642 => "ltsdp1",643 => "ltsdp2",644 => "ltshdp1",645 => "ltshdp2",646 => "ds",647 => "",648 => "wa",649 => "cwa",650 => "gt",651 => "ynf",652 => "jvc",653 => "",654 => "it",655 => '',656 => '',657 => "ka",658 => '',659 => "pc",660 => "ut",661 => '',662 => '',663 => '',664 => "cs",665 => '',666 => '',667 => '',668 => "ec",669 => '',670 => '',671 => "vp",672 => "ls",673 => '',674 => "pt",675 => "wc",676 => "ttb",677 => "cttb",678 => "bn",679 => "sc",680 => "gf",681 => "fh",698 => "mn",699 => "", ]);
 
         if($code = array_search($keyword, $map)){
-            $data = Cache::get($code, false);//cc
+            $data = Cache::store('redis')->get($code, false);//cc
             $isNoCache = in_array($code, ['cc','dy','gf']);
             if($isNoCache || !$data){
                 $json = Http::get('https://open.729ly.net/api/program/'.$code)->json();
@@ -38,7 +38,7 @@ final class LyAudio{
                     'image' => "https://txly2.net/images/program_banners/{$code}_prog_banner_sq.png",
                 ];
                 // Carbon::tomorrow()->diffInSeconds(Carbon::now());
-                if(!$isNoCache) Cache::put($code, $data, strtotime('tomorrow') - time());
+                if(!$isNoCache) Cache::store('redis')->put($code, $data, strtotime('tomorrow') - time());
             }
                 return [
                     'type' => 'music',
