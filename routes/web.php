@@ -52,6 +52,7 @@ Route::get('/test', function (){
 
         $openaiClient = Manager::build(new \GuzzleHttp\Client(), $auth);
         $keyword = trim(Str::remove('@AI助理', $keyword));
+        return [__LINE__];
         $response = $openaiClient->completions()->create(
             new CreateRequest([
                 'model'  => 'text-davinci-003',
