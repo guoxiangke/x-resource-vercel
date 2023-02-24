@@ -26,3 +26,8 @@ Route::get('/cache', function (){
     Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
     return [$data];
 });
+
+Route::get('/resources/{keyword}', function ($keyword){
+    $resource = app("App\Services\Resource");
+    return $resource->__invoke($keyword);
+})->where('keyword', '.*');
