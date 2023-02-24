@@ -4,6 +4,12 @@ use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
+
+use Illuminate\Support\Str;
+
+use Tectalic\OpenAi\Manager;
+use Tectalic\OpenAi\Authentication;
+use Tectalic\OpenAi\Models\Completions\CreateRequest;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,3 +37,37 @@ Route::get('/resources/{keyword}', function ($keyword){
     $resource = app("App\Services\Resource");
     return $resource->__invoke($keyword);
 })->where('keyword', '.*');
+
+
+Route::get('/test', function (){
+    $keyword = '@AI助理 请列表介绍一下GPT3的3个功能示例。';
+    if(Str::contains($keyword, '@AI助理')){
+        // https://laravel-news.com/openai-for-laravel
+        // https://github.com/openai-php/laravel
+        // https://github.com/openai-php/client
+
+        // Build a Tectalic OpenAI REST API Client globally.
+        // $auth = new Authentication(getenv('OPENAI_API_KEY'));
+        $auth = new Authentication(config('services.openai.key'));
+
+        $openaiClient = Manager::build(new \GuzzleHttp\Client(), $auth);
+        $keyword = trim(Str::remove('@AI助理', $keyword));
+        $response = $openaiClient->completions()->create(
+            new CreateRequest([
+                'model'  => 'text-davinci-003',
+                // 'model'  => 'text-ada-001',
+                'prompt' => $keyword,
+                'temperature' => 0.5,
+                'max_tokens' => 800,
+                'top_p'=>1,
+                'frequency_penalty'=>0,
+                'presence_penalty'=>0
+            ])
+        )->toModel();
+
+        return [
+            "type" => "text",
+            "data" => ['content'=>$response->choices[0]->text],
+        ];
+    }
+});

@@ -162,7 +162,6 @@ final class Zhen{
                 "type" => "text",
                 "data" => ['content'=>$response->choices[0]->text],
             ];
-            return [$response->choices[0]];
         }
 
         // https://youtu.be/Y8X8JXNbBbI
