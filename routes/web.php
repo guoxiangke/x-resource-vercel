@@ -48,8 +48,8 @@ Route::get('/test', function (){
 
         // Build a Tectalic OpenAI REST API Client globally.
         // $auth = new Authentication(getenv('OPENAI_API_KEY'));
+        return [__LINE__];
         $auth = new Authentication(config('services.openai.key'));
-        return [__LINE__, config('services.openai.key')];
         $openaiClient = Manager::build(new \GuzzleHttp\Client(), $auth);
         $keyword = trim(Str::remove('@AI助理', $keyword));
         return [__LINE__];
