@@ -137,7 +137,8 @@ final class Zhen{
             // https://github.com/openai-php/client
 
             // Build a Tectalic OpenAI REST API Client globally.
-            $auth = new Authentication(getenv('OPENAI_API_KEY'));
+            // $auth = new Authentication(getenv('OPENAI_API_KEY'));
+            $auth = new Authentication(config('services.openai.key'));
             // $httpClient = new Psr18Client();
             // Manager::build($httpClient, $auth);
 
