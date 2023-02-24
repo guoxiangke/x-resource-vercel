@@ -7,11 +7,13 @@ use Illuminate\Support\Facades\Log;
 
 use Illuminate\Support\Str;
 
-use Symfony\Component\HttpClient\Psr18Client;
-use Tectalic\OpenAi\Authentication;
-use Tectalic\OpenAi\Client;
-use Tectalic\OpenAi\Manager;
-use Tectalic\OpenAi\Models\Completions\CreateRequest;
+use OpenAI\Laravel\Facades\OpenAI;
+
+// use Symfony\Component\HttpClient\Psr18Client;
+// use Tectalic\OpenAi\Authentication;
+// use Tectalic\OpenAi\Client;
+// use Tectalic\OpenAi\Manager;
+// use Tectalic\OpenAi\Models\Completions\CreateRequest;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,9 +44,25 @@ Route::get('/resources/{keyword}', function ($keyword){
 
 
 Route::get('/test', function (){
-    $keyword = '@AI助理 请列表介绍一下GPT3的3个功能示例。';
+    $keyword = '@AI助理 请介绍一下冒泡排序';
     if(Str::contains($keyword, '@AI助理')){
         // https://laravel-news.com/openai-for-laravel
+        $result = OpenAI::completions()->create([
+            'model'  => 'text-davinci-003',
+            // 'model'  => 'text-ada-001',
+            'prompt' => $keyword,
+            'temperature' => 0.5,
+            'max_tokens' => 800,
+            'top_p'=>1,
+            'frequency_penalty'=>0,
+            'presence_penalty'=>0
+        ]);
+
+        return [
+            "type" => "text",
+            "data" => ['content'=>$result['choices'][0]['text']],
+        ];
+
         // https://github.com/openai-php/laravel
         // https://github.com/openai-php/client
 
