@@ -12,6 +12,7 @@
         "laravel/tinker": "^2.7",
         "metowolf/meting": "^1.5",
         "predis/predis": "^2.1",
+        "tectalic/openai": "^1.3",
         "voku/simple_html_dom": "^4.8"
     },
     "require-dev": {
@@ -60,7 +61,8 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": false
         }
     },
     "minimum-stability": "stable",
