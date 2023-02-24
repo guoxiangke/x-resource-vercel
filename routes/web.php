@@ -7,8 +7,10 @@ use Illuminate\Support\Facades\Log;
 
 use Illuminate\Support\Str;
 
-use Tectalic\OpenAi\Manager;
+use Symfony\Component\HttpClient\Psr18Client;
 use Tectalic\OpenAi\Authentication;
+use Tectalic\OpenAi\Client;
+use Tectalic\OpenAi\Manager;
 use Tectalic\OpenAi\Models\Completions\CreateRequest;
 /*
 |--------------------------------------------------------------------------
@@ -48,12 +50,16 @@ Route::get('/test', function (){
 
         // Build a Tectalic OpenAI REST API Client globally.
         // $auth = new Authentication(getenv('OPENAI_API_KEY'));
-        return [__LINE__];
-        $auth = new Authentication(config('services.openai.key'));
-        $openaiClient = Manager::build(new \GuzzleHttp\Client(), $auth);
-        $keyword = trim(Str::remove('@AI助理', $keyword));
-        return [__LINE__];
-        $response = $openaiClient->completions()->create(
+        $auth = new Authentication(getenv('OPENAI_API_KEY'));
+        $httpClient = new \GuzzleHttp\Client();
+        $client = new Client($httpClient, $auth, Manager::BASE_URI);
+        // $client->completions()->create();
+
+        // $auth = new Authentication(config('services.openai.key'));
+        // $openaiClient = Manager::build(new \GuzzleHttp\Client(), $auth);
+        // $keyword = trim(Str::remove('@AI助理', $keyword));
+        // return [__LINE__];
+        $response = $client->completions()->create(
             new CreateRequest([
                 'model'  => 'text-davinci-003',
                 // 'model'  => 'text-ada-001',
