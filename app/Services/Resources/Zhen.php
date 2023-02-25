@@ -135,32 +135,14 @@ final class Zhen{
             // https://laravel-news.com/openai-for-laravel
             // https://github.com/openai-php/laravel
             // https://github.com/openai-php/client
-
-            // Build a Tectalic OpenAI REST API Client globally.
-            // $auth = new Authentication(getenv('OPENAI_API_KEY'));
-            $auth = new Authentication(config('services.openai.key'));
-            // $httpClient = new Psr18Client();
-            // Manager::build($httpClient, $auth);
-
-            $openaiClient = Manager::build(new \GuzzleHttp\Client(), $auth);
             $keyword = trim(Str::remove('@AI助理', $keyword));
-            $response = $openaiClient->completions()->create(
-                new CreateRequest([
-                    'model'  => 'text-davinci-003',
-                    // 'model'  => 'text-ada-001',
-                    'prompt' => $keyword,
-                    'temperature' => 0.5,
-                    'max_tokens' => 800,
-                    'top_p'=>1,
-                    'frequency_penalty'=>0,
-                    'presence_penalty'=>0
-                ])
-            )->toModel();
-
-
+            $client = new Client();
+            $url = 'https://gpt3.51chat.net/api/' . $keyword;
+            $response = Http::get($url);
+            $data = $response->json();
             return [
                 "type" => "text",
-                "data" => ['content'=>$response->choices[0]->text],
+                "data" => ['content'=>$data['choices'][0]['text']],
             ];
         }
 
