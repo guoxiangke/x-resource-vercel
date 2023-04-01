@@ -29,9 +29,10 @@ final class Zhen{
                 $date = date('ymd');
 
                 // 
-                $mp3a = "https://share.simai.life/fwd/".date('Y')."/fwd{$date}_a.mp3";
-                $mp3b = "https://share.simai.life/fwd/".date('Y')."/fwd{$date}_b.mp3";
-                $mp3c = "https://share.simai.life/fwd/".date('Y')."/fwd{$date}_c.mp3";
+                $domain = "r2fwd.simai.life";
+                $mp3a = "https://{$domain}/".date('Y')."/fwd{$date}_a.mp3";
+                $mp3b = "https://{$domain}/".date('Y')."/fwd{$date}_b.mp3";
+                $mp3c = "https://{$domain}/".date('Y')."/fwd{$date}_c.mp3";
                 $image = 'https://share.simai.life/uPic/2022/Of6qHa.jpg';
 
 
