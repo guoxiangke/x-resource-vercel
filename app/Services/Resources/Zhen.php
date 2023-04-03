@@ -29,7 +29,7 @@ final class Zhen{
                 $date = date('ymd');
 
                 // 
-                $domain = "r2fwd.simai.life";
+                $domain = "share.simai.life/fwd";
                 $mp3a = "https://{$domain}/".date('Y')."/fwd{$date}_a.mp3";
                 $mp3b = "https://{$domain}/".date('Y')."/fwd{$date}_b.mp3";
                 $mp3c = "https://{$domain}/".date('Y')."/fwd{$date}_c.mp3";
