@@ -143,7 +143,7 @@ final class Zhen{
             $data = $response->json();
             return [
                 "type" => "text",
-                "data" => ['content'=>$data['choices'][0]['text']],
+                "data" => ['content'=>$data['choices'][0]['message']['content']],
             ];
         }
 
