@@ -62,7 +62,7 @@ final class FWD{
                 ];
 
                 $textDescD = $meta[date('n-j-Y') . 'c.text']??'这是一段测试哦！\n换行1';
-                $textDescD = "这是一段测试哦！\n换行3";
+                $textDescD = "这是一段测试哦！\n换行3\r\n4";
                 if($textDescD){
                     $additionD = [
                         'type' => 'text',
