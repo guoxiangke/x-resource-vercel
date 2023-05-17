@@ -22,7 +22,6 @@ final class FWD{
             $cacheKey = "xbot.keyword.".$keyword;
 
             $data = Cache::store('redis')->get($cacheKey, false);
-            $data = false;
             if(!$data){
                 $url = now()->format('/Y/m/');
                 $year = date('Y');
@@ -61,8 +60,8 @@ final class FWD{
                     // 'addition'=>$additionD,
                 ];
 
-                $textDescD = $meta[date('n-j-Y') . 'c.text']??'这是一段测试哦！\n换行1';
-                $textDescD = "这是一段测试哦！\n换行3\r\n4";
+                $textDescD = $meta[date('n-j-Y') . 'c.text']??'';
+                // $textDescD = "这是一段测试哦！\n换行3\r\n4";
                 if($textDescD){
                     $additionD = [
                         'type' => 'text',
