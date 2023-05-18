@@ -20,7 +20,6 @@ final class FWD{
 	{
         if($keyword == '789'){
             $cacheKey = "xbot.keyword.".$keyword;
-
             $data = Cache::store('redis')->get($cacheKey, false);
             if(!$data){
                 $url = now()->format('/Y/m/');
@@ -54,7 +53,18 @@ final class FWD{
                 $descA = $meta[date('n-j-Y') . 'a']??'';
                 $descB = $meta[date('n-j-Y') . 'b']??'';
                 $descC = $meta[date('n-j-Y') . 'c']??'';
+                // $textDescD = "这是一段测试哦！\n换行3\r\n4";
+                $textDescD = $meta[date('n-j-Y') . 'c.text']??"=灵修分享=\n今天的天英讨论问题是：";
                
+                $additionc = [
+                    'type' => 'music',
+                    "data"=> [
+                        "url" => $mp3c,
+                        'title' => '分享-'.$date,
+                        'description' => $descC,
+                        'image' => $image,
+                    ]
+                ];
                 $additionb = [
                     'type' => 'music',
                     "data"=> [
@@ -63,6 +73,7 @@ final class FWD{
                         'description' => $descB,
                         'image' => $image,
                     ],
+                    'addition'=>$additionc,
                 ];
                 $additiona = [
                     'type' => 'music',
@@ -75,31 +86,15 @@ final class FWD{
                     'addition'=>$additionb,
                 ];
 
-                $additionc = [
-                    'type' => 'music',
-                    "data"=> [
-                        "url" => $mp3c,
-                        'title' => '分享-'.$date,
-                        'description' => $descC,
-                        'image' => $image,
-                    ],
-
-                    'addition'=>$additiona,
-                ];
-
-                $textDescD = $meta[date('n-j-Y') . 'c.text']??'';
-                // $textDescD = "这是一段测试哦！\n换行3\r\n4";
+                // 周六日只发c
                 $data = [
                     'type' => 'text',
                     "data"=> [
                         'content' => $textDescD,
                     ],
-                    'addition'=>$additionc,
+                    'addition'=>now()->isWeekend()?$additionc:$additiona,
                 ];
-                //      0 (for Sunday) through 6 (for Saturday)
-                if(date('w')==0 || date('w')==6){
-                    $data = $additionc;
-                }
+                
                 Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
             }
 
