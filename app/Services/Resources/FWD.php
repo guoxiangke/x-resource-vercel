@@ -54,28 +54,7 @@ final class FWD{
                 $descA = $meta[date('n-j-Y') . 'a']??'';
                 $descB = $meta[date('n-j-Y') . 'b']??'';
                 $descC = $meta[date('n-j-Y') . 'c']??'';
-                $additionc = [
-                    'type' => 'music',
-                    "data"=> [
-                        "url" => $mp3c,
-                        'title' => '分享-'.$date,
-                        'description' => $descC,
-                        'image' => $image,
-                    ],
-                    // 'addition'=>$additionD,
-                ];
-
-                $textDescD = $meta[date('n-j-Y') . 'c.text']??'';
-                // $textDescD = "这是一段测试哦！\n换行3\r\n4";
-                if($textDescD){
-                    $additionD = [
-                        'type' => 'text',
-                        "data"=> [
-                            'content' => $textDescD,
-                        ],
-                    ];
-                    $additionc['addition'] = $additionD;
-                } 
+               
                 $additionb = [
                     'type' => 'music',
                     "data"=> [
@@ -84,9 +63,8 @@ final class FWD{
                         'description' => $descB,
                         'image' => $image,
                     ],
-                    'addition'=>$additionc,
                 ];
-                $data = [
+                $additiona = [
                     'type' => 'music',
                     "data"=> [
                         "url" => $mp3a,
@@ -95,6 +73,28 @@ final class FWD{
                         'image' => $image,
                     ],
                     'addition'=>$additionb,
+                ];
+
+                $additionc = [
+                    'type' => 'music',
+                    "data"=> [
+                        "url" => $mp3c,
+                        'title' => '分享-'.$date,
+                        'description' => $descC,
+                        'image' => $image,
+                    ],
+
+                    'addition'=>$additiona,
+                ];
+
+                $textDescD = $meta[date('n-j-Y') . 'c.text']??'';
+                // $textDescD = "这是一段测试哦！\n换行3\r\n4";
+                $data = [
+                    'type' => 'text',
+                    "data"=> [
+                        'content' => $textDescD,
+                    ],
+                    'addition'=>$additionc,
                 ];
                 //      0 (for Sunday) through 6 (for Saturday)
                 if(date('w')==0 || date('w')==6){
