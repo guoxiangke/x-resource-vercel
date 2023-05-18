@@ -42,9 +42,14 @@ final class FWD{
                 $htmlTmp = HtmlDomParser::str_get_html($html);
                 $meta = [];
                 foreach ($htmlTmp->find('tbody tr') as $e) {
-                    $meta[$e->find('td',0)->plaintext . $e->find('td',1)->plaintext] = $e->find('td',2)->plaintext;
+                    $cloumn1 = $e->find('td',0)->plaintext; //date
+                    $cloumn2 = $e->find('td',1)->plaintext; //abc
+                    $cloumn3 = $e->find('td',2)->plaintext; //desc
+                    // $cloumn4 = $e->find('td',3)->plaintext; //c-text
+                    $meta[$cloumn1 . $cloumn2] = $cloumn3;
                     // 每天一句文本发群里！
-                    $meta[$e->find('td',0)->plaintext . $e->find('td',1)->plaintext . '.text'] = $e->find('td',3)->plaintext;
+                    if($cloumn2=='c')
+                        $meta[$cloumn1 . $cloumn2 . '.text'] = $e->find('td',3)->plaintext;
                 }
                 $descA = $meta[date('n-j-Y') . 'a']??'';
                 $descB = $meta[date('n-j-Y') . 'b']??'';
@@ -66,7 +71,7 @@ final class FWD{
                     $additionD = [
                         'type' => 'text',
                         "data"=> [
-                            'content' => $textDescD,
+                            'content' => "{$textDescD}",
                         ],
                     ];
                     $additionc['addition'] = $additionD;
