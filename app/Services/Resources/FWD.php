@@ -71,7 +71,7 @@ final class FWD{
                     $additionD = [
                         'type' => 'text',
                         "data"=> [
-                            'content' => "{$textDescD}",
+                            'content' => $textDescD,
                         ],
                     ];
                     $additionc['addition'] = $additionD;
