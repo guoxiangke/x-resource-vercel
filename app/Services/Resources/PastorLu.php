@@ -31,13 +31,14 @@ final class PastorLu{
 
                 // dd(now()->subDay()->format('md'));
                 $yesterdayTitle = '';
+                $yesterday = now()->format('md');
                 foreach ($matches[1] as $key => $value) {
-                    $yesterday = now()->subDay()->format('md');
                     if($key%4==0  &&  Str::startsWith($value, $yesterday)){
                         $yesterdayTitle = $value;
                     }
                 }
                 $yesterdayTitle = str_replace('-- 卢乾坤牧师 Pastor Paul Qiankun Lu', '', $yesterdayTitle);
+                $yesterdayTitle = str_replace($yesterday.'-每日与主同行 –', '', $yesterdayTitle);
 
                 // "videoId":"og2SkjrNyt0"
                 $re = '/"videoId":"(.*?)"/';
@@ -46,9 +47,8 @@ final class PastorLu{
                 foreach ($matches[1] as $key => $value) {
                     if($key%4==0) $ids[] = $value;
                 }
-                $id = $ids[1];
-                
-                $image = 'https://share.simai.life/uPic/2023/xHKk3z.png';
+                $id = $ids[0];
+                $image = 'https://share.simai.life/uPic/2023/Amn09V.jpg';
                 $data =[
                     "url" => "https://www.youtube.com/watch?v={$id}",
                     'title' => "每日与主同行-{$yesterday}" ,
