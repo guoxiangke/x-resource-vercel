@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 use voku\helper\HtmlDomParser;
 
 final class Miniature{
-	public function __invoke($keyword)
+	public function _invoke($keyword)
 	{
         if($keyword == "miniature"){
             $date = date('ymd');

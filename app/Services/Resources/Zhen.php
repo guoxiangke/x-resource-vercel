@@ -16,7 +16,7 @@ use Tectalic\OpenAi\Authentication;
 use Tectalic\OpenAi\Manager;
 use Tectalic\OpenAi\Models\Completions\CreateRequest;
 final class Zhen{
-	public function __invoke($keyword)
+	public function _invoke($keyword)
 	{
         if($keyword == '799'){
 

@@ -11,7 +11,7 @@ use voku\helper\HtmlDomParser;
 use GuzzleHttp\Client;
 
 final class Kr{
-    public function __invoke($keyword)
+    public function _invoke($keyword)
     {
         // 互联网人的资讯早餐（音频版）周1-5
         if($keyword == "8点1氪"){

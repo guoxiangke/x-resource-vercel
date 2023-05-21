@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 final class Zenai {
-	public function __invoke($keyword) {
+	public function _invoke($keyword) {
 
     if($keyword == 700){
         $content = "=====节目分组1=====\n【701】灵程真言\n【702】喜乐灵程\n【703】认识你真好 \n【704】真爱驻我家\n【705】尔道自建\n【706】旷野吗哪\n【707】真道分解\n【708】馒头的对话\n【709】拥抱每一天\n【710】星动一刻";

@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 use voku\helper\HtmlDomParser;
 
 final class Wallstreetcn{
-	public function __invoke($keyword) {
+	public function _invoke($keyword) {
         if($keyword == "华尔街见闻早餐"){
             $date = date('ymd');
             $cacheKey = "xbot.keyword.Wallstreetcn";

@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 use voku\helper\HtmlDomParser;
 
 final class OurDailyBread {
-	public function __invoke($keyword) {
+	public function _invoke($keyword) {
         $data = [];
         if($keyword == 'odb'){
           $s1 = date('Y/m');

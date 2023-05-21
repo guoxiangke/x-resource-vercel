@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 final class Ifanr{
-    public function __invoke($keyword)
+    public function _invoke($keyword)
     {
         // 周1-5
         if($keyword == "ifanr"){

@@ -12,20 +12,21 @@ use voku\helper\HtmlDomParser;
 // https://www.youtube.com/@pastorpaulqiankunlu618/videos
 
 final class PastorLu{
-	public function __invoke($keyword)
+	public function _invoke($keyword)
 	{
         if($keyword == "PastorLu"){
             return $this->_getData();
         }
         if($keyword == 801){
             $data = $this->_getData();
-            $data['data']['url'] = "https://r2share.simai.life/@pastorpaulqiankunlu618/{$data['data']['vid']}.mp4";
+            $vid = $data['data']['vid'];
+            $data['data']['url'] = "https://r2share.simai.life/@pastorpaulqiankunlu618/".$vid.".mp4";
             return $data;
         }
 	}
 
 
-    public function _getData(){
+    private function _getData(){
             $date = date('ymd');
             $cacheKey = "xbot.keyword.PastorLu";
             $data = Cache::store('redis')->get($cacheKey, false);

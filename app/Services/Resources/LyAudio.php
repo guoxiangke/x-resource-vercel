@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 use voku\helper\HtmlDomParser;
 
 final class LyAudio{
-    public function __invoke($keyword) {
+    public function _invoke($keyword) {
     //3位数关键字xxx
     // $offset = substr($oriKeyword, 3) ?: 0;
     $keyword = substr($keyword, 0, 3);

@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 use Metowolf\Meting;
 
 final class Music{
-	public function __invoke($keyword)
+	public function _invoke($keyword)
 	{
         $triggerKeywords = ["点歌", "我想听", "想听", "来一首", "来首"];
         if(Str::startsWith($keyword, $triggerKeywords)){

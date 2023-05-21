@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 use voku\helper\HtmlDomParser;
 
 final class Zan{
-	public function __invoke($keyword)
+	public function _invoke($keyword)
 	{
         $triggerKeywords = ["赞美诗网","赞美诗歌","赞美诗", "赞美", "赞" ];
         if(Str::startsWith($keyword, $triggerKeywords)){

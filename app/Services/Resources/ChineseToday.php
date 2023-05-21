@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 use voku\helper\HtmlDomParser;
 
 final class ChineseToday{
-	public function __invoke($keyword)
+	public function _invoke($keyword)
 	{
         if($keyword == "每日箴言"){
             $date = date('ymd');

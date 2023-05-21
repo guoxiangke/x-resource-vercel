@@ -16,7 +16,7 @@ use Tectalic\OpenAi\Authentication;
 use Tectalic\OpenAi\Manager;
 use Tectalic\OpenAi\Models\Completions\CreateRequest;
 final class FWD{
-	public function __invoke($keyword)
+	public function _invoke($keyword)
 	{
         if($keyword == '789'){
             $cacheKey = "xbot.keyword.".$keyword;

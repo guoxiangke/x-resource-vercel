@@ -13,7 +13,7 @@ use voku\helper\HtmlDomParser;
 //old 930 365x2=730
 // https://cmcbiblereading.com/
 final class BibleCMC{
-	public function __invoke($keyword)
+	public function _invoke($keyword)
 	{
 		//New cmcn1-244
         if(Str::startsWith($keyword, "cmcn")){

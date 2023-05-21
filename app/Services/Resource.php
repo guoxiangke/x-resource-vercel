@@ -8,7 +8,7 @@ use ReflectionClass;
 class Resource
 {
     // getResByKeyword
-    public function __invoke($keyword){
+    public function _invoke($keyword){
         $paths = __DIR__.'/Resources';
         $namespace = app()->getNamespace();
         $res = null;
@@ -24,7 +24,7 @@ class Resource
         			$isEnable = true; // TODO weight 
         	    if($isEnable){
         	        $resource = app($resource);
-        	        $res = $resource->__invoke($keyword);
+        	        $res = $resource->_invoke($keyword);
                     if($res) return $res;
         	        // if(!is_null($res)) break;
         	    }
