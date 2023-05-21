@@ -15,6 +15,17 @@ final class PastorLu{
 	public function __invoke($keyword)
 	{
         if($keyword == "PastorLu"){
+            return $this->_getData();
+        }
+        if($keyword == 801){
+            $data = $this->_getData();
+            $data['data']['url'] = "https://r2share.simai.life/@pastorpaulqiankunlu618/{$data['data']['vid']}.mp4";
+            return $data;
+        }
+	}
+
+
+    public function _getData(){
             $date = date('ymd');
             $cacheKey = "xbot.keyword.PastorLu";
             $data = Cache::store('redis')->get($cacheKey, false);
@@ -54,6 +65,7 @@ final class PastorLu{
                     'title' => "每日与主同行-{$yesterday}" ,
                     'description' => $yesterdayTitle,
                     'image' => $image,
+                    'vid' => $id,
                 ];
                 Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
             }
@@ -62,5 +74,4 @@ final class PastorLu{
                 "data"=> $data,
             ];
         }
-	}
 }
