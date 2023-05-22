@@ -86,7 +86,7 @@ final class PastorLu{
                 $vid = $matches[1][$yesterdayIndex];
                 $image = 'https://share.simai.life/uPic/2023/Amn09V.jpg';
 
-                $yesterdayTitle = str_replace('-- 卢乾坤牧师 Pastor Paul Qiankun Lu', '', $yesterdayTitle);
+                $yesterdayTitle = str_replace('-- 卢乾坤牧师 Pastor Paul Qiankun Lu', '-- 訂閱、點讚，轉發即是宣教', $yesterdayTitle);
                 $yesterdayTitle = str_replace($day.'-每日与主同行 –', '', $yesterdayTitle);
 
                 $data = [
