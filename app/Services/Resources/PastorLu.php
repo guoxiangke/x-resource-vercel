@@ -28,8 +28,26 @@ final class PastorLu{
             $addition['type'] = 'music';
             $addition['data']['url']= $m4a;
             $data['addition'] = $addition;
-
+            unset($data['addition']['addition']);
             return $data;
+        }
+        // 周日的
+        if($keyword == 802){
+            if($day = now()->dayOfWeek()==0){
+                $data = $this->_getData();
+                $data = $data['addition'];
+
+                $vid = $data['data']['vid'];
+                $data['data']['url'] = "https://r2share.simai.life/@pastorpaulqiankunlu618/".$vid.".mp4";
+
+                // Add audio
+                $m4a = "https://r2share.simai.life/@pastorpaulqiankunlu618/".$vid.".m4a";
+                $addition = $data;
+                $addition['type'] = 'music';
+                $addition['data']['url']= $m4a;
+                $data['addition'] = $addition;
+                return $data;
+            }
         }
 	}
 
@@ -43,44 +61,64 @@ final class PastorLu{
                 $response = Http::get("https://www.youtube.com/@pastorpaulqiankunlu618/videos");
                 $html =$response->body();
 
-                // "text":"0518-每日
-                $re = '/"text":"(.*?)"/';
-
-                // "/"text\":\"(.*?)\"/gm";
+                
+                $re = '/vi\/([^\/]+).*?"text":"(.*?)"/';
                 preg_match_all($re, $html, $matches);
+                
 
-                // dd(now()->subDay()->format('md'));
-                $yesterdayTitle = '';
-                $yesterday = now()->format('md');
-                foreach ($matches[1] as $key => $value) {
-                    if($key%4==0  &&  Str::startsWith($value, $yesterday)){
+                $day = now()->format('md');
+                
+                $lastSundayTitle = null;
+                $yesterdayTitle = null;
+                $yesterdayIndex = null;
+                $lastSundayIndex = null;
+                foreach ($matches[2] as $key => $value) {
+                    // "text":"0518-每日
+                    if(Str::startsWith($value, $day)){
                         $yesterdayTitle = $value;
+                        $yesterdayIndex = $key;
+                    }
+                    if(Str::containsAll($value, ['主日信息', $day])){
+                        $lastSundayTitle = $value;
+                        $lastSundayIndex = $key;
                     }
                 }
-                $yesterdayTitle = str_replace('-- 卢乾坤牧师 Pastor Paul Qiankun Lu', '', $yesterdayTitle);
-                $yesterdayTitle = str_replace($yesterday.'-每日与主同行 –', '', $yesterdayTitle);
 
-                // "videoId":"og2SkjrNyt0"
-                $re = '/"videoId":"(.*?)"/';
-                preg_match_all($re, $html, $matches);
-                $ids = [];
-                foreach ($matches[1] as $key => $value) {
-                    if($key%4==0) $ids[] = $value;
-                }
-                $id = $ids[0];
+                $vid = $matches[1][$yesterdayIndex];
                 $image = 'https://share.simai.life/uPic/2023/Amn09V.jpg';
-                $data =[
-                    "url" => "https://www.youtube.com/watch?v={$id}",
-                    'title' => "每日与主同行-{$yesterday}" ,
-                    'description' => $yesterdayTitle,
-                    'image' => $image,
-                    'vid' => $id,
+
+                // $yesterdayTitle = str_replace('-- 卢乾坤牧师 Pastor Paul Qiankun Lu', '', $yesterdayTitle);
+                // $yesterdayTitle = str_replace($day.'-每日与主同行 –', '', $yesterdayTitle);
+
+                $data = [
+                    'type' => 'link',
+                    'data' => [
+                        "url" => "https://www.youtube.com/watch?v={$vid}",
+                        'title' => "每日与主同行-{$day}" ,
+                        'description' => $yesterdayTitle,
+                        'image' => $image,
+                        'vid' => $vid,
+                    ]
                 ];
+
+                // dd($lastSundayIndex, $lastSundayTitle,$yesterdayIndex,$yesterdayTitle);
+                if($lastSundayTitle){
+                    $vid = $matches[1][$yesterdayIndex];
+                    $descs = explode('：',$lastSundayTitle);
+                    $data['addition'] = [
+                        'type' => 'link',
+                        'data' => [
+                            "url" => "https://www.youtube.com/watch?v={$vid}",
+                            'title' => $descs[0],//"主日信息-{$day}" ,
+                            'description' => $descs[1],//$lastSundayTitle,
+                            'image' => $image,
+                            'vid' => $vid,
+                        ]
+                    ];
+                }
                 Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
             }
-            return [
-                'type' => 'link',
-                "data"=> $data,
-            ];
+            return $data;
+
         }
 }
