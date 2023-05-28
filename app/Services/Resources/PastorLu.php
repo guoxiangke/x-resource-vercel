@@ -102,7 +102,7 @@ final class PastorLu{
 
                 // dd($lastSundayIndex, $lastSundayTitle,$yesterdayIndex,$yesterdayTitle);
                 if($lastSundayTitle){
-                    $vid = $matches[1][$yesterdayIndex];
+                    $vid = $matches[1][$lastSundayIndex];
                     $descs = explode('：',$lastSundayTitle);
                     $data['addition'] = [
                         'type' => 'link',
