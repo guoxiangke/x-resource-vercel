@@ -100,6 +100,92 @@ final class FWD{
 
             return $data;
         }
+
+        if($keyword == '803'){
+            $response = Http::get("https://www.youtube.com/@fwdforwardchurch7991/streams");
+            $html =$response->body();
+
+            $re = '/"text":"FWDFC ([^"]+).*?"videoId":"([^"]+)"/';
+            preg_match_all($re, $html, $matches);
+
+            $day = now()->format('md');
+
+            foreach($matches[1] as $key => $value){
+                if(Str::containsAll($value, ['主日崇拜'])){
+                    $lastSundayTitle = $value;
+                    $lastSundayIndex = $key;
+                    break;
+                }
+            }
+            
+            $vid = $matches[2][$lastSundayIndex];
+            $channelDomain = "https://r2share.simai.life/@fwdforwardchurch7991/";
+            $url = $channelDomain.$vid.".mp4";
+            $image = 'https://share.simai.life/uPic/2023/IeDDmx.jpg';
+
+            $descs = explode('【',$lastSundayTitle);
+            $data = [
+                'type' => 'link',
+                'data' => [
+                    "url" => $url,
+                    'title' => "【日出神話】主日崇拜線上直播",
+                    'description' => $descs[0],
+                    'image' => $image,
+                    'vid' => $vid,
+                ]
+            ];
+
+            // Add audio
+            $m4a = $channelDomain.$vid.".m4a";
+            $addition = $data;
+            $addition['type'] = 'music';
+            $addition['data']['url']= $m4a;
+            $data['addition'] = $addition;
+
+            return $data;
+        }
+        if($keyword == '804'){
+            $response = Http::get("https://www.youtube.com/@fwdforwardchurch7991/streams");
+            $html =$response->body();
+
+            $re = '/"text":"FWDFC ([^"]+).*?"videoId":"([^"]+)"/';
+            preg_match_all($re, $html, $matches);
+
+            $day = now()->format('md');
+
+            foreach($matches[1] as $key => $value){
+                if(Str::containsAll($value, ['禱告會'])){
+                    $lastSundayTitle = $value;
+                    $lastSundayIndex = $key;
+                    break;
+                }
+            }
+            
+            $vid = $matches[2][$lastSundayIndex];
+            $channelDomain = "https://r2share.simai.life/@fwdforwardchurch7991/";
+            $url = $channelDomain.$vid.".mp4";
+            $image = 'https://share.simai.life/uPic/2023/IeDDmx.jpg';
+
+            $descs = explode('【',$lastSundayTitle);
+            $data = [
+                'type' => 'link',
+                'data' => [
+                    "url" => $url,
+                    'title' => "前進教會週三禱告會",
+                    'description' => $lastSundayTitle,
+                    'image' => $image,
+                    'vid' => $vid,
+                ]
+            ];
+            
+            // Add audio
+            $m4a = $channelDomain.$vid.".m4a";
+            $addition = $data;
+            $addition['type'] = 'music';
+            $addition['data']['url']= $m4a;
+            $data['addition'] = $addition;
+            return $data;
+        }
         return null;
 	}
 }
