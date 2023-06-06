@@ -277,7 +277,6 @@ final class BibleCMC{
                 $html =$response->body();
                 $htmlTmp = HtmlDomParser::str_get_html($html);
                 $mp3Url =  $htmlTmp->getElementByTagName('source')->getAttribute('src');
-                $mp3Url = str_replace('?_=1', '', $mp3Url);
                 $title =  $htmlTmp->findOne('h1.entry-title')->text();
                 $offset++;
                 $description =  "{$offset}/244". $htmlTmp->getElementByTagName('h1')->text();
@@ -1250,7 +1249,6 @@ final class BibleCMC{
                 $html =$response->body();
                 $htmlTmp = HtmlDomParser::str_get_html($html);
                 $mp3Url =  $htmlTmp->getElementByTagName('source')->getAttribute('src');
-                $mp3Url = str_replace('?_=1', '', $mp3Url);
                 $title =  $htmlTmp->findOne('h1.entry-title')->text();
                 $offset++;
                 $description =  "{$offset}/929". $htmlTmp->getElementByTagName('h1')->text();

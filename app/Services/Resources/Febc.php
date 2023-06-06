@@ -115,7 +115,7 @@ final class Febc {
 
                 $data['statistics'] = [
                     'metric' => class_basename(__CLASS__),
-                    "keyword" => $keyword,
+                    "keyword" => $code,
                 ];
                 Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
                 return $data;

@@ -42,7 +42,7 @@ final class LyAudio{
                 ];
                 $data['statistics'] = [
                     'metric' => class_basename(__CLASS__),
-                    "keyword" => $keyword,
+                    "keyword" => $code,
                 ];
                 // Carbon::tomorrow()->diffInSeconds(Carbon::now());
                 if(!$isNoCache) Cache::store('redis')->put($code, $data, strtotime('tomorrow') - time());
