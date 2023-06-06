@@ -40,15 +40,15 @@ final class LyAudio{
                 // Carbon::tomorrow()->diffInSeconds(Carbon::now());
                 if(!$isNoCache) Cache::store('redis')->put($code, $data, strtotime('tomorrow') - time());
             }
-                return [
-                    'type' => 'music',
-                    "data"=> $data,
-                    "statistics" =>[
-                        'metric' => 'ly-audio', //action=click/listen
-                        "category" => $keyword,
-                        // "bot" => 1/2/3/4
-                    ]
-                ];
+            $data['statistics'] = [
+                'metric' => 'ly-audio', //action=click/listen
+                "category" => $keyword,
+                // "bot" => 1/2/3/4
+            ];
+            return [
+                'type' => 'music',
+                "data"=> $data
+            ];
         }else{
               return [
                 'type' => 'text',
