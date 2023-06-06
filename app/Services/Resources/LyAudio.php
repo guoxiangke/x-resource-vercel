@@ -32,22 +32,22 @@ final class LyAudio{
                 $json = Http::get('https://open.729ly.net/api/program/'.$code)->json();
                 $item = $json['data'][0];
                 $data =[
-                    "url" => $item['link'],
-                    'title' => "【{$keyword}】".$item['program_name'].'-'.$item['play_at'],
-                    'description' => $item['description'],
-                    'image' => "https://txly2.net/images/program_banners/{$code}_prog_banner_sq.png",
+                    'type' => 'music',
+                    'data' => [
+                        "url" => $item['link'],
+                        'title' => "【{$keyword}】".$item['program_name'].'-'.$item['play_at'],
+                        'description' => $item['description'],
+                        'image' => "https://txly2.net/images/program_banners/{$code}_prog_banner_sq.png",
+                    ],
+                ];
+                $data['statistics'] = [
+                    'metric' => class_basename(__CLASS__),
+                    "keyword" => $keyword,
                 ];
                 // Carbon::tomorrow()->diffInSeconds(Carbon::now());
                 if(!$isNoCache) Cache::store('redis')->put($code, $data, strtotime('tomorrow') - time());
             }
-            $data['statistics'] = [
-                'metric' => class_basename(__CLASS__),
-                "keyword" => $keyword,
-            ];
-            return [
-                'type' => 'music',
-                "data"=> $data
-            ];
+            return $data;
         }else{
               return [
                 'type' => 'text',
