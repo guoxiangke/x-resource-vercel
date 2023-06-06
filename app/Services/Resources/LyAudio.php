@@ -41,9 +41,8 @@ final class LyAudio{
                 if(!$isNoCache) Cache::store('redis')->put($code, $data, strtotime('tomorrow') - time());
             }
             $data['statistics'] = [
-                'metric' => 'ly-audio', //action=click/listen
-                "category" => $keyword,
-                // "bot" => 1/2/3/4
+                'metric' => class_basename(__CLASS__),
+                "keyword" => $keyword,
             ];
             return [
                 'type' => 'music',

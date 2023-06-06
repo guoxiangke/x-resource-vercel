@@ -15,7 +15,7 @@ use Tectalic\OpenAi\Authentication;
 // use Tectalic\OpenAi\Client;
 use Tectalic\OpenAi\Manager;
 use Tectalic\OpenAi\Models\Completions\CreateRequest;
-final class Zhen{
+final class Tpehoc{
 	public function _invoke($keyword)
 	{
         if($keyword == '799'){
@@ -34,6 +34,7 @@ final class Zhen{
                 $html = (string)$response->getBody();
                 $htmlTmp = HtmlDomParser::str_get_html($html);
                 $mp3 =  $htmlTmp->findOne('.wp-audio-shortcode source')->getAttribute('src');
+                $mp3 = str_replace('?_=1', '', $mp3);
                 $title =  $htmlTmp->findOne('.post-content-outer h3')->text();
 
                 $description =  $htmlTmp->findOne('.post-content-outer .post-content p')->text();
@@ -43,11 +44,17 @@ final class Zhen{
                 
 
                 $image = 'https://lytx2021.s3-ap-southeast-1.amazonaws.com/share/799/blSf8E7UOiXCZwL.png';
-                $url =  $htmlTmp->findOne('.post-content-outer h3 a')->getAttribute('href');
+                $url = $htmlTmp->findOne('.post-content-outer h3 a')->getAttribute('href');
                 $addition =[
                     'type' => 'link',
                     'data' => compact(['image','url','title','description']),
                 ];
+                $addition['statistics'] = [
+                    'metric' => class_basename(__CLASS__),
+                    "keyword" => $keyword,
+                    "type" => 'link',
+                ];
+
 
                 $data =[
                     'type' => 'music',
@@ -58,6 +65,11 @@ final class Zhen{
                         'image' => $image,
                     ],
                     'addition'=>$addition,
+                ];
+                $data['statistics'] = [
+                    'metric' => class_basename(__CLASS__),
+                    "keyword" => $keyword,
+                    "type" => 'audio',
                 ];
                 Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
             }

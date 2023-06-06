@@ -27,8 +27,19 @@ final class PastorLu{
             $addition = $data;
             $addition['type'] = 'music';
             $addition['data']['url']= $m4a;
+            $addition['statistics'] = [
+                'metric' => class_basename(__CLASS__),
+                "keyword" => $keyword,
+                "type" => 'audio',
+            ];
+
             $data['addition'] = $addition;
             unset($data['addition']['addition']);
+            $data['statistics'] = [
+                'metric' => class_basename(__CLASS__),
+                "keyword" => $keyword,
+                "type" => 'video',
+            ];
             return $data;
         }
         // 周日的
@@ -44,7 +55,17 @@ final class PastorLu{
                 $addition = $data;
                 $addition['type'] = 'music';
                 $addition['data']['url']= $m4a;
+                $addition['statistics'] = [
+                    'metric' => class_basename(__CLASS__),
+                    "keyword" => $keyword,
+                    "type" => 'audio',
+                ];
                 $data['addition'] = $addition;
+                $data['statistics'] = [
+                    'metric' => class_basename(__CLASS__),
+                    "keyword" => $keyword,
+                    "type" => 'video',
+                ];
                 return $data;
             // }
         }
@@ -100,6 +121,12 @@ final class PastorLu{
                     ]
                 ];
 
+                $data['statistics'] = [
+                    'metric' => class_basename(__CLASS__),
+                    "keyword" => $vid,
+                    "type" => 'everyday',
+                ];
+
                 // dd($lastSundayIndex, $lastSundayTitle,$yesterdayIndex,$yesterdayTitle);
                 if($lastSundayTitle){
                     $vid = $matches[1][$lastSundayIndex];
@@ -113,6 +140,11 @@ final class PastorLu{
                             'image' => $image,
                             'vid' => $vid,
                         ]
+                    ];
+                    $data['addition']['statistics'] = [
+                        'metric' => class_basename(__CLASS__),
+                        "keyword" => $vid,
+                        "type" => 'sunday',
                     ];
                 }
                 Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
@@ -158,6 +190,12 @@ final class PastorLu{
                         'image' => $image,
                         'vid' => $vid,
                     ]
+                ];
+
+                $data['statistics'] = [
+                    'metric' => class_basename(__CLASS__),
+                    "keyword" => $vid,
+                    "type" => 'sunday',
                 ];
                 Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
             }

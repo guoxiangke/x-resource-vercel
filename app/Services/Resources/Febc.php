@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-final class Zenai {
+final class Febc {
 	public function _invoke($keyword) {
 
     if($keyword == 700){
@@ -112,6 +112,11 @@ final class Zenai {
                     Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
                     return $data;
                 }
+
+                $data['statistics'] = [
+                    'metric' => class_basename(__CLASS__),
+                    "keyword" => $keyword,
+                ];
                 Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
                 return $data;
             }

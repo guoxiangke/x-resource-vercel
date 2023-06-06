@@ -65,6 +65,12 @@ final class FWD{
                         'image' => $image,
                     ]
                 ];
+                $additionc['statistics'] = [
+                    'metric' => class_basename(__CLASS__),
+                    "keyword" => $keyword,
+                    "type" => 'c',
+                ];
+
                 $additionb = [
                     'type' => 'music',
                     "data"=> [
@@ -75,6 +81,11 @@ final class FWD{
                     ],
                     'addition'=>$additionc,
                 ];
+                $additionb['statistics'] = [
+                    'metric' => class_basename(__CLASS__),
+                    "keyword" => $keyword,
+                    "type" => 'b',
+                ];
                 $additiona = [
                     'type' => 'music',
                     "data"=> [
@@ -84,6 +95,11 @@ final class FWD{
                         'image' => $image,
                     ],
                     'addition'=>$additionb,
+                ];
+                $additiona['statistics'] = [
+                    'metric' => class_basename(__CLASS__),
+                    "keyword" => $keyword,
+                    "type" => 'a',
                 ];
 
                 // 周六日只发c
@@ -134,14 +150,23 @@ final class FWD{
                     'vid' => $vid,
                 ]
             ];
+            $data['statistics'] = [
+                'metric' => class_basename(__CLASS__),
+                "keyword" => $keyword,
+                "type" => 'video',
+            ];
 
             // Add audio
             $m4a = $channelDomain.$vid.".m4a";
             $addition = $data;
             $addition['type'] = 'music';
             $addition['data']['url']= $m4a;
+            $addition['statistics'] = [
+                'metric' => class_basename(__CLASS__),
+                "keyword" => $keyword,
+                "type" => 'audio',
+            ];
             $data['addition'] = $addition;
-
             return $data;
         }
         if($keyword == '804'){
@@ -177,12 +202,22 @@ final class FWD{
                     'vid' => $vid,
                 ]
             ];
+            $data['statistics'] = [
+                'metric' => class_basename(__CLASS__),
+                "keyword" => $keyword,
+                "type" => 'video',
+            ];
             
             // Add audio
             $m4a = $channelDomain.$vid.".m4a";
             $addition = $data;
             $addition['type'] = 'music';
             $addition['data']['url']= $m4a;
+            $addition['statistics'] = [
+                'metric' => class_basename(__CLASS__),
+                "keyword" => $keyword,
+                "type" => 'audio',
+            ];
             $data['addition'] = $addition;
             return $data;
         }

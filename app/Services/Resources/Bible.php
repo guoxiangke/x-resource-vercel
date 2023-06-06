@@ -61,6 +61,11 @@ final class Bible{
                         'description' => $desc,
                     ],
                 ];
+                $data['statistics'] = [
+                    'metric' => class_basename(__CLASS__),
+                    "keyword" => $keyword,
+                    "version" => "CCB",
+                ];
 
                 //0-38-65
                 if($key>38){
@@ -80,6 +85,11 @@ final class Bible{
                             'title' => $title,
                             'description' => $desc,
                         ],
+                    ];
+                    $addition['statistics'] = [
+                        'metric' => class_basename(__CLASS__),
+                        "keyword" => $keyword,
+                        "version" => "CSBS",
                     ];
                     $data = array_merge($data,['addition'=>$addition]);
                 }

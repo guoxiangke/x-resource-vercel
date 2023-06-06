@@ -29,6 +29,10 @@ final class ChineseToday{
                     'title' => "【每日箴言】{$date}",
                     'description' => $title,
                 ];
+                $data['statistics'] = [
+                    'metric' => class_basename(__CLASS__),
+                    "keyword" => $keyword,
+                ];
                 Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
             }
             return [

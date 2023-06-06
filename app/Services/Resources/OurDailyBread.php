@@ -17,14 +17,19 @@ final class OurDailyBread {
           $s2 = date('m') . "-". date('d') . "-".date('y');
         	$url = "https://dzxuyknqkmi1e.cloudfront.net/odb/{$s1}/odb-{$s2}.mp3";
           $title = "Our Daily Bread" . $s2;
-          return [
-            	'type' => 'music',
-            	"data"=> [
-                    "url" => $url,
-                    'title' => $title,
-                    'description' => "来自Our Daily Bread",
-                ],
-            ];
+          $data = [
+            'type' => 'music',
+            "data"=> [
+                  "url" => $url,
+                  'title' => $title,
+                  'description' => "来自Our Daily Bread",
+              ],
+          ];
+          $data['statistics'] = [
+              'metric' => class_basename(__CLASS__),
+              "keyword" => $keyword
+          ];
+          return $data;
         }
         return null;
 	}
