@@ -113,7 +113,7 @@ final class PastorLu{
                 $data = [
                     'type' => 'link',
                     'data' => [
-                        "url" => "https://www.youtube.com/watch?v={$vid}",
+                        "url" => "https://www.youtube.com/embed/{$vid}",
                         'title' => "每日与主同行-{$day}" ,
                         'description' => $yesterdayTitle,
                         'image' => $image,
@@ -134,7 +134,7 @@ final class PastorLu{
                     $data['addition'] = [
                         'type' => 'link',
                         'data' => [
-                            "url" => "https://www.youtube.com/watch?v={$vid}",
+                            "url" => "https://www.youtube.com/embed/{$vid}",
                             'title' => $descs[0],//"主日信息-{$day}" ,
                             'description' => $descs[1],//$lastSundayTitle,
                             'image' => $image,
@@ -184,7 +184,7 @@ final class PastorLu{
                 $data = [
                     'type' => 'link',
                     'data' => [
-                        "url" => "https://www.youtube.com/watch?v={$vid}",
+                        "url" => "https://www.youtube.com/embed/{$vid}",
                         'title' => $descs[0],//"主日信息-{$day}" ,
                         'description' => $descs[1],//$lastSundayTitle,
                         'image' => $image,
