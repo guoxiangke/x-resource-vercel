@@ -135,7 +135,7 @@ final class FWD{
             }
             
             $vid = $matches[2][$lastSundayIndex];
-            $channelDomain = "https://r2share.simai.life/@fwdforwardchurch7991/";
+            $channelDomain = env('R2_DOMAIN')."/@fwdforwardchurch7991/";
             $url = $channelDomain.$vid.".mp4";
             $image = 'https://share.simai.life/uPic/2023/IeDDmx.jpg';
 
@@ -187,7 +187,7 @@ final class FWD{
             }
             
             $vid = $matches[2][$lastSundayIndex];
-            $channelDomain = "https://r2share.simai.life/@fwdforwardchurch7991/";
+            $channelDomain = env('R2_DOMAIN')."/@fwdforwardchurch7991/";
             $url = $channelDomain.$vid.".mp4";
             $image = 'https://share.simai.life/uPic/2023/IeDDmx.jpg';
 

@@ -20,10 +20,10 @@ final class PastorLu{
         if($keyword == 801){
             $data = $this->_getData();
             $vid = $data['data']['vid'];
-            $data['data']['url'] = "https://r2share.simai.life/@pastorpaulqiankunlu618/".$vid.".mp4";
+            $data['data']['url'] = env('R2_DOMAIN')."/@pastorpaulqiankunlu618/".$vid.".mp4";
 
             // Add audio
-            $m4a = "https://r2share.simai.life/@pastorpaulqiankunlu618/".$vid.".m4a";
+            $m4a = env('R2_DOMAIN')."/@pastorpaulqiankunlu618/".$vid.".m4a";
             $addition = $data;
             $addition['type'] = 'music';
             $addition['data']['url']= $m4a;
@@ -48,10 +48,10 @@ final class PastorLu{
                 $data = $this->_getLastSundayData();
 
                 $vid = $data['data']['vid'];
-                $data['data']['url'] = "https://r2share.simai.life/@pastorpaulqiankunlu618/".$vid.".mp4";
+                $data['data']['url'] = env('R2_DOMAIN')."/@pastorpaulqiankunlu618/".$vid.".mp4";
 
                 // Add audio
-                $m4a = "https://r2share.simai.life/@pastorpaulqiankunlu618/".$vid.".m4a";
+                $m4a = env('R2_DOMAIN')."/@pastorpaulqiankunlu618/".$vid.".m4a";
                 $addition = $data;
                 $addition['type'] = 'music';
                 $addition['data']['url']= $m4a;
