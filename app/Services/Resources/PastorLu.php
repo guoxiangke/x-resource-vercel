@@ -187,8 +187,8 @@ final class PastorLu{
                     'type' => 'link',
                     'data' => [
                         "url" => "https://www.youtube.com/embed/{$vid}",
-                        'title' => $descs[0],//"主日信息-{$day}" ,
-                        'description' => $descs[1],//$lastSundayTitle,
+                        'title' => $descs[0]??"",//"主日信息-{$day}" ,
+                        'description' => $descs[1]??"",//$lastSundayTitle,
                         'image' => $image,
                         'vid' => $vid,
                     ]
