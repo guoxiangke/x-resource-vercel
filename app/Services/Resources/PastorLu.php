@@ -127,6 +127,8 @@ final class PastorLu{
                     "type" => 'everyday',
                 ];
 
+                // 主日信息模版
+                // 20230528主日信息：信靠神！祂必供应 -- 卢乾坤牧师
                 // dd($lastSundayIndex, $lastSundayTitle,$yesterdayIndex,$yesterdayTitle);
                 if($lastSundayTitle){
                     $vid = $matches[1][$lastSundayIndex];
@@ -135,8 +137,8 @@ final class PastorLu{
                         'type' => 'link',
                         'data' => [
                             "url" => "https://www.youtube.com/embed/{$vid}",
-                            'title' => $descs[0],//"主日信息-{$day}" ,
-                            'description' => $descs[1],//$lastSundayTitle,
+                            'title' => $descs[0]??'',//"主日信息-{$day}" ,
+                            'description' => $descs[1]??'',//$lastSundayTitle,
                             'image' => $image,
                             'vid' => $vid,
                         ]
