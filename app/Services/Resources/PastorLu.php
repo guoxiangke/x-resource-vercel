@@ -40,7 +40,10 @@ final class PastorLu{
                 "keyword" => $keyword,
                 "type" => 'video',
             ];
-            return $data;
+            $newData = $data['addition'];
+            unset($data['addition']);
+            $newData['addition'] = $data;
+            return $newData;
         }
         // 周日的
         if($keyword == 802){
@@ -66,7 +69,10 @@ final class PastorLu{
                     "keyword" => $keyword,
                     "type" => 'video',
                 ];
-                return $data;
+                $newData = $data['addition'];
+                unset($data['addition']);
+                $newData['addition'] = $data;
+                return $newData;
             // }
         }
 	}
