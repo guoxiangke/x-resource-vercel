@@ -221,6 +221,47 @@ final class FWD{
             $data['addition'] = $addition;
             return $data;
         }
+        if($keyword == '805'){
+            $response = Http::get("https://www.youtube.com/@user-om4ne5gh7e/videos");
+            $html =$response->body();
+
+            $re = '/"text":"([^"]+).*?"videoId":"([^"]+)"/';
+            preg_match_all($re, $html, $matches);
+            
+            $vid = $matches[2][0];
+            $title = $matches[1][0];
+            $channelDomain = env('R2_DOMAIN')."/@user-om4ne5gh7e/";
+            $url = $channelDomain.$vid.".mp4";
+            $image = 'https://share.simai.life/uPic/2023/ZXRsRu.jpg';
+            $data = [
+                'type' => 'link',
+                'data' => [
+                    "url" => $url,
+                    'title' => $title,
+                    'description' => "百度茶室",
+                    'image' => $image,
+                    'vid' => $vid,
+                ]
+            ];
+            $data['statistics'] = [
+                'metric' => class_basename(__CLASS__),
+                "keyword" => $keyword,
+                "type" => 'video',
+            ];
+            
+            // Add audio
+            $m4a = $channelDomain.$vid.".m4a";
+            $addition = $data;
+            $addition['type'] = 'music';
+            $addition['data']['url']= $m4a;
+            $addition['statistics'] = [
+                'metric' => class_basename(__CLASS__),
+                "keyword" => $keyword,
+                "type" => 'audio',
+            ];
+            $data['addition'] = $addition;
+            return $data;
+        }
         return null;
 	}
 }
