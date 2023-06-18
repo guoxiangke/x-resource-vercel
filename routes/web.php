@@ -37,6 +37,15 @@ Route::get('/cache', function (){
     return [$data];
 });
 
+Route::get('/set/baidutea/sendIsOn', function (){
+    $cacheKey = '805';
+    $data = date('Y-m-d H:i:s',strtotime('tomorrow')); //设置BJ晚上7点发送
+    Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
+    $data = Cache::store('redis')->get($cacheKey, false);
+    return [$data];
+});
+
+
 Route::get('/resources/{keyword}', function ($keyword){
     $resource = app("App\Services\Resource");
     return $resource->_invoke($keyword);

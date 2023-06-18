@@ -222,6 +222,9 @@ final class FWD{
             return $data;
         }
         if($keyword == '805'){
+            // $cacheKey = 'baidutea';
+            $isSetOn = Cache::store('redis')->get($keyword, false);
+            if(!$isSetOn) return; // 必须设置ON后才发送，不定期更新
             $response = Http::get("https://www.youtube.com/@user-om4ne5gh7e/videos");
             $html =$response->body();
 
