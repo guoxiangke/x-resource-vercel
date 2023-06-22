@@ -141,7 +141,7 @@ final class Tpehoc{
                     "data"=> [
                         "url" => "https://r2share.simai.life" . $item['url'],
                         'title' => $item['title'],
-                        'description' => "罗门 门徒训练 ",
+                        'description' => "罗门",
                     ],
                     // 'addition'=>$addition,
                 ];
