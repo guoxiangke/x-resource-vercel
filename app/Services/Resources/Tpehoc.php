@@ -139,7 +139,7 @@ final class Tpehoc{
                 $data =[
                     'type' => 'music',
                     "data"=> [
-                        "url" => $item['url'],
+                        "url" => str_replace('/罗门/门徒训练/','/%E7%BD%97%E9%97%A8/%E9%97%A8%E5%BE%92%E8%AE%AD%E7%BB%83/',$item['url']),
                         'title' => $item['title'],
                         'description' => "教会事工/门徒训练/罗门 ",
                     ],
