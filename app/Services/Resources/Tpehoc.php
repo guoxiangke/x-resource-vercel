@@ -134,7 +134,7 @@ final class Tpehoc{
                     "耶稣与门徒",
                     "作主门徒的挑战",
                 ];
-                $index = now()->format('z') % 51;
+                $index = 51 - now()->format('z') % 51;
                 $item = $items[$index];
                 $index = str_pad($index, 2, "0", STR_PAD_LEFT);
                 $data =[
@@ -215,7 +215,7 @@ final class Tpehoc{
                     "传道人的神圣呼召 (2)",
                     "传道人的神圣呼召 (1)"
                 ];
-                $index = now()->format('z') % 51;
+                $index = 51 - now()->format('z') % 51;
                 $item = $items[$index];
                 $data =[
                     'type' => 'music',
