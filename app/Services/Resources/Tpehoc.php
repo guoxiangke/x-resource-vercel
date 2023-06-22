@@ -75,6 +75,85 @@ final class Tpehoc{
             }
             return $data;
         }
+        if($keyword == '798'){
+            // https://zgtai.com/教会事工/门徒训练
+            // $cacheKey = "xbot.keyword.".$keyword;
+            // $data = Cache::store('redis')->get($cacheKey, false);
+            // if(!$data){
+                $items = [
+                    ["title"=>"52. 门徒训练与圣灵的建造工作（二）","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds52.mp3"],
+                    ["title"=>"51. 门徒训练与圣灵的建造工作（一）","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds51.mp3"],
+                    ["title"=>"50. 领袖的拣选与榜样","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds50.mp3"],
+                    ["title"=>"49. 门徒祷告生活的再思","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds49.mp3"],
+                    ["title"=>"48. 门徒的进修生活与成长","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds48.mp3"],
+                    ["title"=>"47. 门徒的时间管理与灵修生活","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds47.mp3"],
+                    ["title"=>"46. 门徒的职业与工作观","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds46.mp3"],
+                    ["title"=>"45. 门徒的圣洁与成圣生活","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds45.mp3"],
+                    ["title"=>"44. 基督徒团契生活的操练","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds44.mp3"],
+                    ["title"=>"43. 攻克己身的挑战","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds43.mp3"],
+                    ["title"=>"42. 如何训练门徒信心的功课","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds42.mp3"],
+                    ["title"=>"41. 学习倾听神的声音","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds41.mp3"],
+                    ["title"=>"40. 作领袖的代价与陷阱","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds40.mp3"],
+                    ["title"=>"39. 寻找合神心意的领袖","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds39.mp3"],
+                    ["title"=>"38. 门徒在苦难中的操练","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds38.mp3"],
+                    ["title"=>"37. 如何听讲道？","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds37.mp3"],
+                    ["title"=>"36. 门徒与十字架的道理","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds36.mp3"],
+                    ["title"=>"35. 作门徒必须终身学习","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds35.mp3"],
+                    ["title"=>"34. 门徒与讲道操练（二）","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds34.mp3"],
+                    ["title"=>"33. 门徒与讲道操练（一）","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds33.mp3"],
+                    ["title"=>"32. 如何明白神的旨意","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds32.mp3"],
+                    ["title"=>"31. 过敬虔的门徒生活","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds31.mp3"],
+                    ["title"=>"30. 展开门徒训练者的服事","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds30.mp3"],
+                    ["title"=>"29. 如何带领一个小组","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds29.mp3"],
+                    ["title"=>"28. 如何带领归纳式研经法(查经班)","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds28.mp3"],
+                    ["title"=>"27. 门徒家庭崇拜(家庭祭坛)的建立","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds27.mp3"],
+                    ["title"=>"26. 门徒敬拜的操练（二）","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds26.mp3"],
+                    ["title"=>"25. 门徒敬拜的操练（一）","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds25.mp3"],
+                    ["title"=>"24. 作门徒与钱财的好管家","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds24.mp3"],
+                    ["title"=>"23. 成为热心事奉的门徒","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds23.mp3"],
+                    ["title"=>"22. 门徒的情绪管理（二）","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds22.mp3"],
+                    ["title"=>"21. 门徒的情绪管理（一）","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds21.mp3"],
+                    ["title"=>"20. 迈向灵性的成熟（二）","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds20.mp3"],
+                    ["title"=>"19. 迈向灵性的成熟（一）","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds19.mp3"],
+                    ["title"=>"18. 门徒训练的栽培计划","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds18.mp3"],
+                    ["title"=>"17. 门徒的品格操练－话语和舌头的控制","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds17.mp3"],
+                    ["title"=>"16. 门徒进阶训练的栽培计划","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds16.mp3"],
+                    ["title"=>"15. 初信者的栽培计划","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds15.mp3"],
+                    ["title"=>"14. 门徒训练与恩赐操练","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds14.mp3"],
+                    ["title"=>"13. 门徒训练与配搭事奉","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds13.mp3"],
+                    ["title"=>"12. 门徒训练与教会增长","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds12.mp3"],
+                    ["title"=>"11. 门徒的纪律生活","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds11.mp3"],
+                    ["title"=>"10. 门徒训练者的操练","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds10.mp3"],
+                    ["title"=>"09. 从信徒到门徒","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds09.mp3"],
+                    ["title"=>"08. 门徒训练的目标(四)：团契生活的操练","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds08.mp3"],
+                    ["title"=>"07. 门徒训练的目标(三)：作见证的操练","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds07.mp3"],
+                    ["title"=>"06. 门徒训练的目标(二)：祷告的操练","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds06.mp3"],
+                    ["title"=>"05. 门徒训练的目标(一)：有关读经","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds05.mp3"],
+                    ["title"=>"04. 寻找人作门徒（二）","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds04.mp3"],
+                    ["title"=>"03. 寻找人作门徒（一）","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds03.mp3"],
+                    ["title"=>"02. 耶稣与门徒","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-ds02.mp3"],
+                    ["title"=>"01. 作主门徒的挑战","url"=> "https://zgtai.ink/zgtai/罗门/门徒训练/m-d011.mp3"],
+                ];
+                $index = now()->format('z');
+                $item = $items[$index%51];
+                $data =[
+                    'type' => 'music',
+                    "data"=> [
+                        "url" => $item['url'],
+                        'title' => $item['title'],
+                        'description' => "教会事工/门徒训练/罗门 ",
+                    ],
+                    // 'addition'=>$addition,
+                ];
+                $data['statistics'] = [
+                    'metric' => class_basename(__CLASS__),
+                    "keyword" => $keyword,
+                    "type" => 'audio',
+                ];
+                // Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
+            // }
+            return $data;
+        }
 
         if(Str::contains($keyword, '@AI助理')){
             // https://laravel-news.com/openai-for-laravel
