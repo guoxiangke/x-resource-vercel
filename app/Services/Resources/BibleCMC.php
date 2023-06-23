@@ -287,12 +287,13 @@ final class BibleCMC{
                     'type' => 'link',
                     'data' => compact(['image','url','title','description']),
                 ];
-                
+
                 $url = $mp3Url;
+                $url = str_replace('?_=1','',$url);
                 $data = [
                 	'type' => 'music',
                 	'data' => compact('url','title','description','image'),
-                	'addition' => $addition
+                	// 'addition' => $addition
                 ];
 	            $data['statistics'] = [
 	                'metric' => class_basename(__CLASS__),
@@ -1261,10 +1262,11 @@ final class BibleCMC{
                 ];
 
                 $url = $mp3Url;
+                $url = str_replace('?_=1','',$url);
                 $data = [
                 	'type' => 'music',
                 	'data' => compact('url','title','description','image'),
-                	'addition' => $addition
+                	// 'addition' => $addition
                 ];
 	            $data['statistics'] = [
 	                'metric' => class_basename(__CLASS__),
