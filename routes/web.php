@@ -52,11 +52,32 @@ Route::get('/resources/{keyword}', function ($keyword){
     return $resource->_invoke($keyword);
 })->where('keyword', '.*');
 
+//获取所有author
+Route::get('/tingdao/author', function (){
+    $response = Http::asForm()->post('https://www.tingdao.org/index/Sermon/Sermon',[
+        'id'=>'1',
+    ]);
+    $json = $response->json();
+    return $json;
+});
+
+//获取专辑byauthor
+Route::get('/tingdao/album/{author}', function ($author){
+    $response = Http::asForm()->post('https://www.tingdao.org/Sermon/Authoralbum',[
+        'author'=>  $author,
+        'id'=>'1',
+        'order'=>'倒序',
+    ]);
+    $json = $response->json();
+    return $json;
+});
+
+//获取专辑list
 Route::get('/tingdao/{id}', function ($id){
-    // 19717 简明神学（詹姆斯·因内尔·巴刻）
-    // 14930 《软弱之道-靠主得力的人生》
-    // 14696 
-    $response = Http::asForm()->post('https://www.tingdao.org/Record/exhibitions',['ypid'=>"19717"]);
+    $response = Http::asForm()->post('https://www.tingdao.org/index/Sermon/details',[
+        'id'=>$id,
+        'order'=>'倒序',
+    ]);
     $json = $response->json();
     return $json;
 });
