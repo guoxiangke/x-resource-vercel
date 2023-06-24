@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Log;
 
 use Illuminate\Support\Str;
 
-use OpenAI\Laravel\Facades\OpenAI;
+// use OpenAI\Laravel\Facades\OpenAI;
+use Illuminate\Support\Facades\Http;
 
 // use Symfony\Component\HttpClient\Psr18Client;
 // use Tectalic\OpenAi\Authentication;
@@ -50,3 +51,12 @@ Route::get('/resources/{keyword}', function ($keyword){
     $resource = app("App\Services\Resource");
     return $resource->_invoke($keyword);
 })->where('keyword', '.*');
+
+Route::get('/tingdao/{id}', function ($id){
+    // 19717 简明神学（詹姆斯·因内尔·巴刻）
+    // 14930 《软弱之道-靠主得力的人生》
+    // 14696 
+    $response = Http::asForm()->post('https://www.tingdao.org/Record/exhibitions',['ypid'=>"19717"]);
+    $json = $response->json();
+    return $json;
+});
