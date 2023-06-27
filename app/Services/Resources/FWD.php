@@ -27,10 +27,10 @@ final class FWD{
                 $date = date('ymd');
 
                 // 正常每天有3个音频，周六日只有c音频
-                $domain = "share.simai.life/fwd";
-                $mp3a = "https://{$domain}/".date('Y')."/fwd{$date}_a.mp3";
-                $mp3b = "https://{$domain}/".date('Y')."/fwd{$date}_b.mp3";
-                $mp3c = "https://{$domain}/".date('Y')."/fwd{$date}_c.mp3";
+                $domain = env('R2_DOMAIN')."/fwd";
+                $mp3a = "{$domain}/".date('Y')."/fwd{$date}_a.mp3";
+                $mp3b = "{$domain}/".date('Y')."/fwd{$date}_b.mp3";
+                $mp3c = "{$domain}/".date('Y')."/fwd{$date}_c.mp3";
                 $image = 'https://share.simai.life/uPic/2022/Of6qHa.jpg';
 
 
