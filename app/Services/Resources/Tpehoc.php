@@ -22,7 +22,7 @@ final class Tpehoc{
 
             // $date = date('Ymd');
             // ->subDays(1)
-            $url = now()->format('/Y/m/');
+            $url = now()->subDays(1)->format('/Y/m/');
 
             $url = 'https://www.tpehoc.org.tw'.$url;
             $cacheKey = "xbot.keyword.".$keyword;
@@ -134,9 +134,9 @@ final class Tpehoc{
                     "耶稣与门徒",
                     "作主门徒的挑战",
                 ];
-                $index = now()->format('z') % 51;
-                $item = $items[$index];
-                $index = 52 - $index;
+                $items = array_reverse($items);
+                $index = now()->addDay(1)->format('z') % 51;
+                $item = $items[$index-1];
                 $index = str_pad($index, 2, "0", STR_PAD_LEFT);
                 $data =[
                     'type' => 'music',
@@ -216,9 +216,10 @@ final class Tpehoc{
                     "传道人的神圣呼召 (2)",
                     "传道人的神圣呼召 (1)"
                 ];
-                $index = now()->format('z') % 51;
-                $item = $items[$index];
-                $index = 52 - $index;
+                $items = array_reverse($items);
+                $index = now()->addDay(1)->format('z') % 51;
+                $item = $items[$index-1];
+                $index = str_pad($index, 2, "0", STR_PAD_LEFT);
                 $data =[
                     'type' => 'music',
                     "data"=> [
