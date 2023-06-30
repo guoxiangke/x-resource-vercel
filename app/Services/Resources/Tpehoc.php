@@ -80,6 +80,7 @@ final class Tpehoc{
             // $cacheKey = "xbot.keyword.".$keyword;
             // $data = Cache::store('redis')->get($cacheKey, false);
             // if(!$data){
+            $image = 'https://zgtai.com/wp-content/uploads/Luo/luo-36.jpg';
                 $items = [
                     "门徒训练与圣灵的建造工作（二）",
                     "门徒训练与圣灵的建造工作（一）",
@@ -144,6 +145,7 @@ final class Tpehoc{
                         "url" => "https://r2share.simai.life/zgtai.com/mds/" . $index . ".mp3",
                         'title' => "($index/52)" . $item,
                         'description' => "罗门,门徒训练",
+                        'image' => $image,
                     ],
                     // 'addition'=>$addition,
                 ];
@@ -162,6 +164,7 @@ final class Tpehoc{
             // $cacheKey = "xbot.keyword.".$keyword;
             // $data = Cache::store('redis')->get($cacheKey, false);
             // if(!$data){
+            $image = 'https://zgtai.com/wp-content/uploads/Luo/luo-36.jpg';
                 $items=[
                     "教牧人员与十字架的道路 (2)",
                     "教牧人员与十字架的道路 (1)",
@@ -226,6 +229,7 @@ final class Tpehoc{
                         "url" => "https://r2share.simai.life/zgtai.com/mgs/" . str_pad($index, 2, "0", STR_PAD_LEFT) . ".mp3",
                         'title' => "($index/52)" . $item,
                         'description' => "罗门,我是好牧人",
+                        'image' => $image,
                     ],
                     // 'addition'=>$addition,
                 ];
