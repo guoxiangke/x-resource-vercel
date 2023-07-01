@@ -56,13 +56,6 @@ final class LyAudio{
                 if(!$isNoCache) Cache::store('redis')->put($code, $data, strtotime('tomorrow') - time());
             }
             return $data;
-        }else{
-              return [
-                'type' => 'text',
-                "data"=> [
-                  "content"=> '此节目已停播/暂无此编号资源',
-                ]
-          ];
         }
     }
   }
