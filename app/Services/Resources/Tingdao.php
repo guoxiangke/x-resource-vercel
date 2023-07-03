@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use voku\helper\HtmlDomParser;
 
 final class Tingdao{
 	public function _invoke($keyword)
 	{
+        //t001-t369
         if(Str::startsWith($keyword,'t')){//1-369
             $date = date('ymd');
             $cacheKey = "xbot.tingdao.".$keyword;
@@ -389,7 +389,7 @@ final class Tingdao{
                     ['title'=>"竭诚为主-十二月合辑（奥斯瓦尔德·章伯斯）",'id'=>1337],
                 ];
                 $integer = (int) preg_replace("/[^0-9]/", "", $keyword);
-                $index = $integer%368;
+                $index = $integer%369;
                 $album = $albums[$index];
                 $id = $album['id'];
                 $url = "https://pub-6de883f3fd4a43c28675e9be668042c2.r2.dev/{$id}/{$id}.json";
