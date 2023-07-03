@@ -11,9 +11,8 @@ use Illuminate\Support\Str;
 final class Tingdao{
 	public function _invoke($keyword)
 	{
-        //t001-t369
-        if(Str::startsWith($keyword,'t')){//1-369
-            $date = date('ymd');
+        //t001-t369+001
+        if(Str::startsWith($keyword,'t') && strlen($keyword) >= 4){//1-369
             $cacheKey = "xbot.tingdao.".$keyword;
             $data = Cache::store('redis')->get($cacheKey, false);
             if(!$data){
@@ -388,9 +387,14 @@ final class Tingdao{
                     ['title'=>"竭诚为主-十一月合辑（奥斯瓦尔德·章伯斯）",'id'=>1336],
                     ['title'=>"竭诚为主-十二月合辑（奥斯瓦尔德·章伯斯）",'id'=>1337],
                 ];
-                $integer = (int) preg_replace("/[^0-9]/", "", $keyword);
-                $index = $integer%369;
-                $album = $albums[$index];
+                $oriKeyword = substr($keyword,1,3);
+                $index = substr($keyword, 4);
+                $albumId = (int) preg_replace("/[^0-9]/", "", $oriKeyword);
+                $albumIndex = (int) preg_replace("/[^0-9]/", "", $index);
+
+                $albumId = abs($albumId-1%369);
+                $album = $albums[$albumId%369];
+
                 $id = $album['id'];
                 $url = "https://pub-6de883f3fd4a43c28675e9be668042c2.r2.dev/{$id}/{$id}.json";
                 $data = Http::get($url)->json();
@@ -398,18 +402,23 @@ final class Tingdao{
                 $author = $data['details'][0]['author'];
                 $image = $data['details'][0]['img_url'];
 
-                $index = date('z')%$count;
-                $item = $data['list'][$index];
+                if (strlen($keyword) == 4) {
+                    $key = date('z')%$count;   //1-365
+                }else{
+                    $key = abs(($albumIndex-1)%$count); //1~17
+                }
+                $item = $data['list'][$key];
                 $title = $item['title'];
                 
                 $mp3 = $item['video_url'];
                 // $mp3 = "https://pub-6de883f3fd4a43c28675e9be668042c2.r2.dev/{$id}/{$id}.json";
                 // 'image' => "https://pub-6de883f3fd4a43c28675e9be668042c2.r2.dev/{$id}/{$id}.jpg",
 
+                $keyword = 't'.str_pad($albumId+1, 3, '0', STR_PAD_LEFT);
                 $data =[
                     "url" => $mp3,
                     'title' => "【{$keyword}】$title",
-                    'description' => "$index/$count $author",
+                    'description' => ($key+1)."/$count $author",
                     'image' => $image ,
                 ];
                 $data['statistics'] = [
