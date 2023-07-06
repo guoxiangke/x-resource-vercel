@@ -130,7 +130,7 @@ final class Tingdao{
                     ['title'=>"认识神（詹姆斯·因内尔·巴刻）",'id'=>1338],
                     ['title'=>"重寻圣洁（詹姆斯·因内尔·巴刻）",'id'=>1746],
                     ['title'=>"生命的重整（詹姆斯·因内尔·巴刻）",'id'=>1340],
-                    ['title'=>"软弱之道-靠主得力的人生（詹姆斯·因内尔·巴刻）",'id'=>1348],
+                    ['title'=>"软弱之道-靠主得力的人生（詹姆斯·因内尔·巴刻）",'id'=>1348],//=认识神
                     ['title'=>"爱与爱的果实（约拿单·爱德华兹）",'id'=>1347],
                     ['title'=>"约拿单·爱德华兹小传",'id'=>1396],
                     ['title'=>"神是信徒最好的福分（约拿单·爱德华兹）",'id'=>1868],
@@ -401,6 +401,7 @@ final class Tingdao{
                 $count = count($data['list']);
                 $author = $data['details'][0]['author'];
                 $image = $data['details'][0]['img_url'];
+                $title = $data['details'][0]['title'];
 
                 if (strlen($keyword) == 4) {
                     $key = date('z')%$count;   //1-365
@@ -408,7 +409,7 @@ final class Tingdao{
                     $key = abs(($albumIndex-1)%$count); //1~17
                 }
                 $item = $data['list'][$key];
-                $title = $item['title'];
+                $description = str_replace($title, '', $item['title']);
                 
                 $mp3 = $item['video_url'];
                 // $mp3 = "https://pub-6de883f3fd4a43c28675e9be668042c2.r2.dev/{$id}/{$id}.json";
@@ -417,8 +418,8 @@ final class Tingdao{
                 $keyword = 't'.str_pad($albumId+1, 3, '0', STR_PAD_LEFT);
                 $data =[
                     "url" => $mp3,
-                    'title' => "【{$keyword}】$title",
-                    'description' => ($key+1)."/$count $author",
+                    'title' => "【{$keyword}】". $title,
+                    'description' =>  ($key+1)."/$count 每日更新  $description",
                     'image' => $image ,
                 ];
                 $data['statistics'] = [
