@@ -221,6 +221,7 @@ final class FWD{
             $data['addition'] = $addition;
             return $data;
         }
+        // 百度茶室
         if($keyword == '805'){
             // $cacheKey = 'baidutea';
             $isSetOn = Cache::store('redis')->get($keyword, false);
@@ -242,6 +243,47 @@ final class FWD{
                     "url" => $url,
                     'title' => $title,
                     'description' => "百度茶室",
+                    'image' => $image,
+                    'vid' => $vid,
+                ]
+            ];
+            $data['statistics'] = [
+                'metric' => class_basename(__CLASS__),
+                "keyword" => $keyword,
+                "type" => 'video',
+            ];
+            
+            // Add audio
+            $m4a = $channelDomain.$vid.".m4a";
+            $addition = $data;
+            $addition['type'] = 'music';
+            $addition['data']['url']= $m4a;
+            $addition['statistics'] = [
+                'metric' => class_basename(__CLASS__),
+                "keyword" => $keyword,
+                "type" => 'audio',
+            ];
+            $data['addition'] = $addition;
+            return $data;
+        }
+        // 主日讲道
+        if($keyword == '806'){
+            // $cacheKey = 'baidutea';
+            $isSetOn = Cache::store('redis')->get($keyword, false);
+            if(!$isSetOn) return ['nothing'=>'true']; // 必须设置ON后才发送，不定期更新
+            $response = Http::get("https://r2share.simai.life/playlist/PLLDxN82mMW3NrAoY-Nm6JYsk6ib5_5AZf.json");
+            $matches =$response->json();
+            $vid = $matches['id'];
+            $title = $matches['title'];
+            $channelDomain = env('R2_DOMAIN')."/@fwdforwardchurch7991/";
+            $url = $channelDomain.$vid.".mp4";
+            $image = 'https://share.simai.life/uPic/2023/ZXRsRu.jpg';
+            $data = [
+                'type' => 'link',
+                'data' => [
+                    "url" => $url,
+                    'title' => $title,
+                    'description' => $matches['playlist'],
                     'image' => $image,
                     'vid' => $vid,
                 ]

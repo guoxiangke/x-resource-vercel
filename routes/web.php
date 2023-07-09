@@ -38,9 +38,18 @@ Route::get('/cache', function (){
     return [$data];
 });
 
+// 百度茶室
 Route::get('/set/baidutea/sendIsOn', function (){
     $cacheKey = '805';
-    $data = date('Y-m-d H:i:s',strtotime('tomorrow')); //设置BJ晚上7点发送
+    $data = date('Y-m-d H:i:s',strtotime('tomorrow'));
+    Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
+    $data = Cache::store('redis')->get($cacheKey, false);
+    return [$data];
+});
+// 主日讲道
+Route::get('/set/fwdlist/sendIsOn', function (){
+    $cacheKey = '806';
+    $data = date('Y-m-d H:i:s',strtotime('tomorrow'));
     Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
     $data = Cache::store('redis')->get($cacheKey, false);
     return [$data];
@@ -51,33 +60,3 @@ Route::get('/resources/{keyword}', function ($keyword){
     $resource = app("App\Services\Resource");
     return $resource->_invoke($keyword);
 })->where('keyword', '.*');
-
-//获取所有author
-Route::get('/tingdao/author', function (){
-    $response = Http::asForm()->post('https://www.tingdao.org/index/Sermon/Sermon',[
-        'id'=>'1',
-    ]);
-    $json = $response->json();
-    return $json;
-});
-
-//获取专辑byauthor
-Route::get('/tingdao/album/{author}', function ($author){
-    $response = Http::asForm()->post('https://www.tingdao.org/Sermon/Authoralbum',[
-        'author'=>  $author,
-        'id'=>'1',
-        'order'=>'倒序',
-    ]);
-    $json = $response->json();
-    return $json;
-});
-
-//获取专辑list
-Route::get('/tingdao/{id}', function ($id){
-    $response = Http::asForm()->post('https://www.tingdao.org/index/Sermon/details',[
-        'id'=>$id,
-        'order'=>'倒序',
-    ]);
-    $json = $response->json();
-    return $json;
-});
