@@ -277,7 +277,7 @@ final class FWD{
             $title = $matches['title'];
             $channelDomain = env('R2_DOMAIN')."/@fwdforwardchurch7991/";
             $url = $channelDomain.$vid.".mp4";
-            $image = 'https://share.simai.life/uPic/2023/ZXRsRu.jpg';
+            $image = 'https://share.simai.life/uPic/2023/IeDDmx.jpg';
             $data = [
                 'type' => 'link',
                 'data' => [
