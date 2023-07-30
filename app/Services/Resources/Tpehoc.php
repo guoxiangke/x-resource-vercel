@@ -265,6 +265,7 @@ final class Tpehoc{
                         $items[] = $tempItem;
                     }
                 }
+                Cache::store('redis')->put($cacheKey, $items);
             }
             //https://pub-3813a5d14cba4eaeb297a0dba302143c.r2.dev/playlist/PL_sOpTJkyWnAbZRPaSktjlsv0_nH1K6aV/uA2rYWhj_LY/1.m4a
             $thumbnail = "https://i.ytimg.com/vi/O0XnjapEzyg/sddefault.jpg?sqp=-oaymwEmCIAFEOAD8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGHIgUSg-MA8=&rs=AOn4CLBjNG0aUkKIQZQXomFLd-JJHRYjOA";//$json['thumbnail'];
