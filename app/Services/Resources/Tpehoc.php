@@ -243,6 +243,52 @@ final class Tpehoc{
             return $data;
         }
 
+        // https://www.youtube.com/playlist?list=PL_sOpTJkyWnAbZRPaSktjlsv0_nH1K6aV
+        // 有声书《西游记》精讲1-156
+        if($keyword == '795'){
+            $playListId = 'PL_sOpTJkyWnAbZRPaSktjlsv0_nH1K6aV';
+            $cacheKey = "resources." . $keyword;
+            $items = Cache::store('redis')->get($cacheKey, false);
+            if(!$items){
+                $response = Http::get("https://pub-3813a5d14cba4eaeb297a0dba302143c.r2.dev/playlist/PL_sOpTJkyWnAbZRPaSktjlsv0_nH1K6aV/index.txt");
+                $ids = explode(PHP_EOL, $response->body());
+                $items = [];
+                foreach ($ids as $key => $yid) {
+                    if(!$yid) continue;
+                    $url = "https://pub-3813a5d14cba4eaeb297a0dba302143c.r2.dev/playlist/{$playListId}/{$yid}.info.json";
+                    $json = Http::get($url)->json();
+                    $key = null;
+                    foreach ($json['chapters'] as $key => $chapter) {
+                        $index = $key+1;
+                        $tempItem['title'] = $chapter['title'];
+                        $tempItem['url'] = "{$yid}/{$index}.m4a";
+                        $items[] = $tempItem;
+                    }
+                }
+            }
+            //https://pub-3813a5d14cba4eaeb297a0dba302143c.r2.dev/playlist/PL_sOpTJkyWnAbZRPaSktjlsv0_nH1K6aV/uA2rYWhj_LY/1.m4a
+            $thumbnail = "https://i.ytimg.com/vi/O0XnjapEzyg/sddefault.jpg?sqp=-oaymwEmCIAFEOAD8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGHIgUSg-MA8=&rs=AOn4CLBjNG0aUkKIQZQXomFLd-JJHRYjOA";//$json['thumbnail'];
+            $total = count($items);
+            $index =  now()->format('z') % $total;
+            $item = $items[$index];
+            // dd($json['thumbnail']);
+            $data = [
+                'type' => 'music',
+                "data"=> [
+                    "url" => "https://r2share.simai.life/playlist/{$playListId}/{$item['url']}",
+                    'title' => "($index/$total)" . $item['title'],
+                    'description' => "有声书《西游记》精讲",
+                    'image' => $thumbnail,
+                ],
+            ];
+            $data['statistics'] = [
+                'metric' => class_basename(__CLASS__),
+                "keyword" => $keyword,
+                "type" => 'audio',
+            ];
+            return $data;
+        }
+
         
 
         if(Str::contains($keyword, '@AI助理')){
