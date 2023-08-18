@@ -386,6 +386,7 @@ final class Tingdao{
                     ['title'=>"竭诚为主-十月合辑（奥斯瓦尔德·章伯斯）",'id'=>1335],
                     ['title'=>"竭诚为主-十一月合辑（奥斯瓦尔德·章伯斯）",'id'=>1336],
                     ['title'=>"竭诚为主-十二月合辑（奥斯瓦尔德·章伯斯）",'id'=>1337],
+                    ['title'=>"听妈妈讲那圣经里的故事",'id'=>1583],
                 ];
                 $oriKeyword = substr($keyword,1,3);
                 $index = substr($keyword, 4);
