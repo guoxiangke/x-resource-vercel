@@ -392,9 +392,9 @@ final class Tingdao{
                 $index = substr($keyword, 4);
                 $albumId = (int) preg_replace("/[^0-9]/", "", $oriKeyword);
                 $albumIndex = (int) preg_replace("/[^0-9]/", "", $index);
-
-                $albumId = abs($albumId-1%369);
-                $album = $albums[$albumId%369];
+                $total = count($albums);
+                $albumId = abs($albumId-1%$total);
+                $album = $albums[$albumId%$total];
 
                 $id = $album['id'];
                 $url = "https://pub-6de883f3fd4a43c28675e9be668042c2.r2.dev/{$id}/{$id}.json";
