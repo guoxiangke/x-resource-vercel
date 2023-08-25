@@ -186,6 +186,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Madcoda\Youtube\YoutubeServiceProviderLaravel5::class, // <- add this line
 
         /*
          * Application Service Providers...

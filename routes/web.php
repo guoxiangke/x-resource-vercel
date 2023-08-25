@@ -6,15 +6,11 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 
-// use OpenAI\Laravel\Facades\OpenAI;
-use Illuminate\Support\Facades\Http;
-
-// use Symfony\Component\HttpClient\Psr18Client;
-// use Tectalic\OpenAi\Authentication;
-// use Tectalic\OpenAi\Client;
-// use Tectalic\OpenAi\Manager;
-// use Tectalic\OpenAi\Models\Completions\CreateRequest;
+use Madcoda\Youtube\Facades\Youtube;
+use App\Helpers\Helper;
+use YouTube\YouTubeDownloader;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,6 +51,29 @@ Route::get('/set/fwdlist/sendIsOn', function (){
     return [$data];
 });
 
+Route::get('/youtube/get-last-by-playlist/{playlistId}', function ($playListId){
+    $all = Helper::get_all_items_by_youtube_playlist_id($playListId);
+    return collect($all)->last();
+});
+
+Route::get('/youtube/search-last-by-channel/{channelId}', function ($channelId){
+    $all = Youtube::searchChannelVideos('CCAC', $channelId, $limit=1, $order='date');
+    return collect($all)->first();
+});
+
+Route::get('/youtube/{vid}', function ($vid){
+   return  $video = Youtube::getVideoInfo($vid);
+});
+
+Route::get('/youtube/{vid}/{qualityLabel}', function ($vid, $qualityLabel='all'){
+    $youtube = new YouTubeDownloader();
+    $downloadOptions = $youtube->getDownloadLinks("https://www.youtube.com/watch?v=".$vid);
+    $all = $downloadOptions->getAllFormats() ;
+    return $downloadOptions->getFirstCombinedFormat()->url;
+    // $youtube = new \YouTube\YouTubeStreamer();
+    $allp = Arr::keyBy($all, 'qualityLabel');
+    return $qualityLabel=='all'?$all:$allp[$qualityLabel]->url;
+})->whereIn('qualityLabel', ['all', '360p', '720p', '1080p']);;
 
 Route::get('/resources/{keyword}', function ($keyword){
     $resource = app("App\Services\Resource");
