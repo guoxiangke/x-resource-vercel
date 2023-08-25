@@ -56,8 +56,8 @@ Route::get('/youtube/get-last-by-playlist/{playlistId}', function ($playListId){
     return collect($all)->last();
 });
 
-Route::get('/youtube/search-last-by-channel/{channelId}', function ($channelId){
-    $all = Youtube::searchChannelVideos('CCAC', $channelId, $limit=1, $order='date');
+Route::get('/youtube/search-last-by-channel/{channelId}/{keyword}', function ($channelId,$keyword){
+    $all = Youtube::searchChannelVideos($keyword, $channelId, $limit=1, $order='date');
     return collect($all)->first();
 });
 
