@@ -269,21 +269,27 @@ final class FWD{
         // 主日讲道
         if($keyword == '806'){
             // $cacheKey = 'baidutea';
-            $isSetOn = Cache::store('redis')->get($keyword, false);
-            if(!$isSetOn) return ['nothing'=>'true']; // 必须设置ON后才发送，不定期更新
-            $response = Http::get("https://r2share.simai.life/playlist/PLLDxN82mMW3NrAoY-Nm6JYsk6ib5_5AZf.json");
-            $matches =$response->json();
-            $vid = $matches['id'];
-            $title = $matches['title'];
+            // $isSetOn = Cache::store('redis')->get($keyword, false);
+            // if(!$isSetOn) return ['nothing'=>'true']; // 必须设置ON后才发送，不定期更新
+            $response = Http::get("https://x-resource.51chat.net/youtube/get-last-by-playlist/PLLDxN82mMW3NrAoY-Nm6JYsk6ib5_5AZf");
+            $matches = $response->json();
+            // return $matches['snippet'];
+            $vid = $matches['contentDetails']['videoId'];
+            $title = $matches['snippet']['title'];
             $channelDomain = env('R2_DOMAIN')."/@fwdforwardchurch7991/";
             $url = $channelDomain.$vid.".mp4";
             $image = 'https://share.simai.life/uPic/2023/IeDDmx.jpg';
+
+            $titleArray = explode('｜', $title);
+            $title = $titleArray[0];
+            array_shift($titleArray);
+            $description = implode('｜', $titleArray);
             $data = [
                 'type' => 'link',
                 'data' => [
                     "url" => $url,
                     'title' => $title,
-                    'description' => $matches['playlist'],
+                    'description' => $description,//$matches['snippet']['description'],
                     'image' => $image,
                     'vid' => $vid,
                 ]
