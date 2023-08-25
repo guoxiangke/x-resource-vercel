@@ -268,9 +268,9 @@ final class FWD{
         }
         // 主日讲道
         if($keyword == '806'){
-            // $cacheKey = 'baidutea';
-            // $isSetOn = Cache::store('redis')->get($keyword, false);
-            // if(!$isSetOn) return ['nothing'=>'true']; // 必须设置ON后才发送，不定期更新
+            $cacheKey = 'baidutea';
+            $isSetOn = Cache::store('redis')->get($keyword, false);
+            if(!$isSetOn) return ['nothing'=>'true']; // 必须设置ON后才发送，不定期更新
             $response = Http::get("https://x-resource.51chat.net/youtube/get-last-by-playlist/PLLDxN82mMW3NrAoY-Nm6JYsk6ib5_5AZf");
             $matches = $response->json();
             // return $matches['snippet'];
