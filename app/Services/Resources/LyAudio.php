@@ -43,7 +43,7 @@ final class LyAudio{
                     'type' => 'music',
                     'data' => [
                         "url" => $item['link'],
-                        'title' => "【{$keyword}】".$item['program_name'].'-'.$item['play_at'],
+                        'title' => "【{$keyword}】".str_replace('圣经','SJ',$item['program_name']).'-'.$item['play_at'],
                         'description' => $item['description'],
                         'image' => "https://txly2.net/images/program_banners/{$code}_prog_banner_sq.png",
                     ],
