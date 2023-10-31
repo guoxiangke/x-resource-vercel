@@ -58,21 +58,21 @@ final class Febc {
             'title' => '拥抱每一天',
             'code' => "ee",
         ],
-        '710' =>[//1-7
+        '710' =>[//1-5
             'title' => '天路男行客',
             'code' => "pm",
         ],
-        '711' =>[//1-7
+        '711' =>[//1-5
             'title' => '肋骨咏叹调',
             'code' => "sz",
         ],
-        '712' =>[//1-7
+        '712' =>[//6,7
             'title' => '颜明放羊班',
             'code' => "ym",
         ],
-        '713' =>[
+        '713' =>[//1-2
             'title' => '真爱世界',
-            'code' => "ym",
+            'code' => "tv",
         ],
     ];
 
@@ -80,7 +80,6 @@ final class Febc {
         $cacheKey = "xbot.700.{$keyword}";
         $data = Cache::store('redis')->get($cacheKey, false);
         if($data) return $data;
-
         if(!$data){
             $res = $res[$keyword];
             $response = Http::get("https://d3pc7cwodb2h3p.cloudfront.net/all_{$res['code']}_songs.json");
@@ -88,8 +87,16 @@ final class Febc {
             $jdata = last($json);
 
             $dateStr = date('ymd');
-            if(now()->isWeekend() && $keyword=="708"){
+            if(now()->isWeekend() && in_array($keyword,['708','710','711'])){
                $dateStr = substr($jdata['time'], 2); 
+            }
+
+            if(now()->isWeekday() && in_array($keyword,['712'])){
+               $dateStr = substr($jdata['time'], 2); 
+            }
+
+            if(!(now()->isMonday() || now()->isTuesday()) && in_array($keyword,['713'])){
+               $dateStr = substr($jdata['time'], 2);
             }
 
             $title = "【{$keyword}】{$res['title']}-" . $dateStr;
@@ -97,8 +104,10 @@ final class Febc {
             $mp3Code = $res['code'];
             $image = "https://d33tzbj8j46khy.cloudfront.net/{$code}.png";
             $codeStr = "/{$code}/$mp3Code" . $dateStr;
-            $mp3Domain = 'd20j6nxnxd2c4l';//depk9mke9ym92
-            $mp3 = "https://{$mp3Domain}.cloudfront.net{$codeStr}.mp3";
+            // $mp3Domain = 'd20j6nxnxd2c4l';//depk9mke9ym92
+            // $mp3 = "https://{$mp3Domain}.cloudfront.net{$codeStr}.mp3";
+            $mp3Domain = 'https://aud.pyltapp.net';
+            $mp3 = "{$mp3Domain}{$codeStr}.mp3";
 
             // https://depk9mke9ym92.cloudfront.net/     tltl/tlgr221203.mp3
             // 不好意思，我们的手机app，国内有些地方使用有问题，所以做了新的配置：
