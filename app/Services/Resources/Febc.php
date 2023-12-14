@@ -106,7 +106,7 @@ final class Febc {
             $codeStr = "/{$code}/$mp3Code" . $dateStr;
             // $mp3Domain = 'd20j6nxnxd2c4l';//depk9mke9ym92
             // $mp3 = "https://{$mp3Domain}.cloudfront.net{$codeStr}.mp3";
-            $mp3Domain = 'https://aud.febcmedia.com';
+            $mp3Domain = 'https://aud.pylt.uk';
             $mp3 = "{$mp3Domain}{$codeStr}.mp3";
 
             // https://depk9mke9ym92.cloudfront.net/     tltl/tlgr221203.mp3
