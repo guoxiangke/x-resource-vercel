@@ -394,7 +394,6 @@ final class PastorLu{
             "0625"=>["vid"=>"X1F1ZywhEkw","title"=>"智慧的人生–经文：诗篇第86–90篇"],
             "0626"=>["vid"=>"mlA0qHo4u9M","title"=>"住在至高者的隐密处–经文：诗篇第91–98篇"],
             "0627"=>["vid"=>"uL_kwMtgzKE","title"=>"敬拜与侍奉–经文：诗篇第99–104篇"],
-            "0628"=>["vid"=>"X_pGoc63h40","title"=>"健康的灵命–经文：诗篇第105–107篇"],
             "0628"=>["vid"=>"GIx558nxGos","title"=>"健康的灵命–经文：诗篇第105–107篇"],
             "0629"=>["vid"=>"dYh5_wVCWoc","title"=>"倚靠神施展大能–经文：诗篇第108–115篇"],
             "0630"=>["vid"=>"GYOLj2EsdkU","title"=>"行活人之路–经文：诗篇第116–119篇"],
@@ -579,7 +578,6 @@ final class PastorLu{
             "1226"=>["vid"=>"1ivg__tN6vE","title"=>"终章完结"],
         ];
         $dateStr = date('md');
-        // $dateStr = '0101';
         if(!isset($items[$dateStr])) {
             $item = last($items);
         }else{
