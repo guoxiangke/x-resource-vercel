@@ -578,7 +578,7 @@ final class PastorLu{
             "1225"=>["vid"=>"BeBJkNBaEJQ","title"=>"圣经里最后的祷告- 经文：启示录21-22章"],
             "1226"=>["vid"=>"1ivg__tN6vE","title"=>"终章完结"],
         ];
-        $dateStr = date('my');
+        $dateStr = date('md');
         // $dateStr = '0101';
         if(!isset($items[$dateStr])) {
             $item = last($items);
