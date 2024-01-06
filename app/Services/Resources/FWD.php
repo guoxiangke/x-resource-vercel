@@ -22,9 +22,10 @@ final class FWD{
             $cacheKey = "xbot.keyword.".$keyword;
             $data = Cache::store('redis')->get($cacheKey, false);
             if(!$data){
-                $url = now()->format('/Y/m/');
-                $year = date('Y');
-                $date = date('ymd');
+                $whichDay = now();//->subDays();
+                $url = $whichDay->format('/Y/m/');
+                $year = $whichDay->format('Y');
+                $date = $whichDay->format('ymd');
 
                 // 正常每天有3个音频，周六日只有c音频
                 $domain = env('R2_DOMAIN')."/fwd";
@@ -50,11 +51,12 @@ final class FWD{
                     if($cloumn2=='c')
                         $meta[$cloumn1 . $cloumn2 . '.text'] = $e->find('td',3)->plaintext;
                 }
-                $descA = $meta[date('n-j-Y') . 'a']??'';
-                $descB = $meta[date('n-j-Y') . 'b']??'';
-                $descC = $meta[date('n-j-Y') . 'c']??'';
+                $dayStr = $whichDay->format('n-j-Y');//date('n-j-Y');
+                $descA = $meta[$dayStr . 'a']??'';
+                $descB = $meta[$dayStr . 'b']??'';
+                $descC = $meta[$dayStr . 'c']??'';
                 // $textDescD = "这是一段测试哦！\n换行3\r\n4";
-                $textDescD = $meta[date('n-j-Y') . 'c.text']??"=灵修分享=\n今天的天英讨论问题是：";
+                $textDescD = $meta[$dayStr . 'c.text']??"=灵修分享=\n今天的天英讨论问题是：";
                
                 $additionc = [
                     'type' => 'music',
@@ -79,7 +81,7 @@ final class FWD{
                         'description' => $descB,
                         'image' => $image,
                     ],
-                    'addition'=>$additionc,
+                    'addition' =>$additionc,
                 ];
                 $additionb['statistics'] = [
                     'metric' => class_basename(__CLASS__),
@@ -94,7 +96,7 @@ final class FWD{
                         'description' => $descA,
                         'image' => $image,
                     ],
-                    'addition'=>$additionb,
+                    'addition' =>$additionb,
                 ];
                 $additiona['statistics'] = [
                     'metric' => class_basename(__CLASS__),
@@ -105,10 +107,10 @@ final class FWD{
                 // 周六日只发c
                 $data = [
                     'type' => 'text',
-                    "data"=> [
+                    "data" => [
                         'content' => $textDescD,
                     ],
-                    'addition'=>now()->isWeekend()?$additionc:$additiona,
+                    'addition' => $whichDay->isWeekend()?$additionc:$additiona,
                 ];
                 
                 Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
