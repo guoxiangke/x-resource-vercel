@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Helpers\Helper;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,9 @@ Route::get('/resources/{keyword}', function ($keyword){
     $resource = app("App\Services\Resource");
     return $resource->_invoke($keyword);
 })->where('keyword', '.*');
+
+
+Route::get('/youtube/get-all-by-playlist/{playlistId}', function ($playListId){
+    $all = Helper::get_all_items_by_youtube_playlist_id($playListId);
+    return collect($all);
+});
