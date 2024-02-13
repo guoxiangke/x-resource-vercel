@@ -23,7 +23,6 @@ use YouTube\YouTubeDownloader;
 */
 
 Route::get('/', function () {
-
     return view('welcome');
 });
 
