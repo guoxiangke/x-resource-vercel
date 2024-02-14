@@ -117,6 +117,13 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'vercel' => [
+            'driver' => 'single',
+            'path' =>'/tmp/laravel.log',
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+
     ],
 
 ];

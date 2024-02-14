@@ -23,7 +23,9 @@ use YouTube\YouTubeDownloader;
 */
 
 Route::get('/test/tmp', function () {
-    return file_put_contents('/tmp/test.log', now() . PHP_EOL, FILE_APPEND);
+    $file = '/tmp/test.log';
+    file_put_contents($file, now() . PHP_EOL, FILE_APPEND);
+    return file_get_contents($file);
 });
 
 Route::get('/', function () {
