@@ -82,7 +82,7 @@ final class Febc {
         if($data) return $data;
         if(!$data){
             $res = $res[$keyword];
-            $response = Http::get("https://d3pc7cwodb2h3p.cloudfront.net/all_{$res['code']}_songs.json");
+            $response = Http::get("https://hylt.azureedge.net/jso/all_{$res['code']}_songs.json");
             $json =$response->json();
             $jdata = last($json);
 
