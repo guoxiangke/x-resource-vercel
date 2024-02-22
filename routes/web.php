@@ -22,8 +22,13 @@ use YouTube\YouTubeDownloader;
 |
 */
 
-Route::get('/', function () {
+Route::get('/test/tmp', function () {
+    $file = '/tmp/test.log';
+    file_put_contents($file, now() . PHP_EOL, FILE_APPEND);
+    return file_get_contents($file);
+});
 
+Route::get('/', function () {
     return view('welcome');
 });
 

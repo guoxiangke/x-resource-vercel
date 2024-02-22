@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.7",
         "madcoda/php-youtube-api": "^1.2",
         "metowolf/meting": "^1.5",
+        "opcodesio/log-viewer": "^3.2",
         "predis/predis": "^2.1",
         "voku/simple_html_dom": "^4.8"
     },
