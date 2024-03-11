@@ -21,14 +21,17 @@ final class Music{
             );
             $name = trim($name);
             $cacheKey = "xbot.keyword.163.{$name}";
-            $data = Cache::store('redis')->get($cacheKey, false);
+            // $data = Cache::store('redis')->get($cacheKey, false);
             if(!$data) {
                 $api = new Meting('netease');
+                // $api->cookie("");
                 $data = json_decode($api->format(true)->search($name), 1);
-                $mp3 = "http://music.163.com/song/media/outer/url?id={$data[0]['id']}.mp3";
+                $data = json_decode($api->format(true)->url($data[0]['id']), 1);
+                
+                // $mp3 = "http://music.163.com/song/media/outer/url?id={$data[0]['id']}.mp3";
 
                 $data =[
-                    "url" => $mp3,
+                    "url" => $data['url'],
                     'title' => $name,
                     'description' => "来自网易云音乐",
                 ];
