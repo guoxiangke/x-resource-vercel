@@ -12,6 +12,8 @@ use voku\helper\HtmlDomParser;
 final class Zan{
 	public function _invoke($keyword)
 	{
+        // https://play.zanmei.co/song/p/47372.mp3
+
         $triggerKeywords = ["赞美诗网","赞美诗歌","赞美诗", "赞美", "赞" ];
         if(Str::startsWith($keyword, $triggerKeywords)){
             $name = str_replace(
@@ -23,11 +25,13 @@ final class Zan{
             $cacheKey = "xbot.keyword.zmsg.{$name}";
             $data = Cache::store('redis')->get($cacheKey, false);
             if(!$data){
-                $url = "https://www.zanmeishige.com/search/song/{$name}";
+            // if(1){
+                $url = "https://www.zanmei.ai/search/song/{$name}";
                 $response = Http::get($url);
                 $html = $response->body();
                 $htmlTmp = HtmlDomParser::str_get_html($html);
                 $notFound = $htmlTmp->findOneOrFalse('.empty');
+
                 if($notFound){
                     $notFound = $notFound->text();
                     return [
@@ -42,7 +46,12 @@ final class Zan{
                 $max = 0;
                 $description = '';
                 foreach ($htmlTmp->find('.songs table tr') as $tr) {
-                    $counts = str_replace('&nbsp;','', $tr->findOne('.length')->text());
+                    // $counts = str_replace('&nbsp;','', $tr->findOne('.length span')->text());
+                    $style = $tr->findOne('.length span')->getAllAttributes()['style'];
+                    $style = str_replace('width:','',$style);
+                    $style = str_replace('%;','',$style);
+                    $style *= 100;
+                    $counts = $style;
                     foreach ($tr->find('.name a') as $key => $value) {
                         switch ($key) {
                             case 0:
@@ -72,13 +81,12 @@ final class Zan{
                 preg_match('/\d+/',$songs[$max],$matchs);
                 $id = $matchs[0];
                 // $mp3 = "https://play.readbible.cn/song/p/{$id}.mp3";
-                $mp3 = "https://play.zanmeishige.com/song/p/{$id}.mp3";
+                $mp3 = "https://play.zanmei.co/song/p/{$id}.mp3";
                 $data =[
                     "url" => $mp3,
                     'title' => $name,
                     'description' => $description,
                 ];
-
                 Cache::store('redis')->put($cacheKey, $data);
             }
             return [
