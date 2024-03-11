@@ -21,7 +21,7 @@ final class Music{
             );
             $name = trim($name);
             $cacheKey = "xbot.keyword.163.{$name}";
-            // $data = Cache::store('redis')->get($cacheKey, false);
+            $data = Cache::store('redis')->get($cacheKey, false);
             if(!$data) {
                 $api = new Meting('netease');
                 // $api->cookie("");
