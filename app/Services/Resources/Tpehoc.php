@@ -830,8 +830,8 @@ final class Tpehoc{
         // https://www.youtube.com/watch?v=Y8X8JXNbBbI&list=RDwwpK3p4heEM&index=2
         // dd($keyword,urlencode('?'));// ? => %3F
         // $keyword = str_replace('?', "%3F", $keyword);
-        if(Str::startsWith($keyword, ['https://youtu.be/','https://www.youtube.com/watch?v='])){
-            preg_match('/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w\-]{11})/', $keyword, $matches);
+        Log::error(__CLASS__,[$keyword]);
+        if(preg_match('/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w\-]{11})/', $keyword, $matches)){
             $vid = $matches[1];
             $videoInfo = Youtube::getVideoInfo($vid);
             $title = $videoInfo->snippet->title;
