@@ -21,9 +21,8 @@ final class Wallstreetcn{
                 $json =$response->json();
                 $id = $json['data']['items'][0]['id'];
 
-                // $mp3 =  $json['data']['audio_uri'];
+                // $mp3 =  $json['data']['audio_uri']; 机器读， 不要，要从html里找到
 
-                // https://streaming-wscn.awtmt.com/f2640c3b-74d1-4474-9918-e8da4d9d78d9.mp3
                 $response = Http::get("https://api-one-wscn.awtmt.com/apiv1/content/articles/{$id}?extract=0");
                 $json =$response->json();
                 $html = $json['data']['content'];
@@ -31,12 +30,12 @@ final class Wallstreetcn{
                 $htmlTmp = HtmlDomParser::str_get_html($html);
                 $mp3 =  $htmlTmp->findOne('img.editor-placeholder')->getAttribute('data-uri');
 
-                $title = "华尔街见闻早餐:{$date}";
-				$desc = "市场有风险，投资需谨慎。本文不构成个人投资建议";
+                $title = $json['data']['audio']['title'];;
+				$desc = "华尔街见闻早餐:{$date}"." 市场有风险，投资需谨慎。本文不构成个人投资建议";
                 $data =[
-                    "url" => $mp3,//$json['data']['audio_uri'],
+                    "url" => $mp3,
                     'title' => $title,
-                    'description' => $json['data']['audio']['title'] . $desc,
+                    'description' => $desc,
                 ];
                 Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
             }
