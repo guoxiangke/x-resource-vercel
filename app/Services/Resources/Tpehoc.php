@@ -866,7 +866,8 @@ final class Tpehoc{
                 ],
                 'addition'=>$addition,
             ];
-            Redis::publish('youtube-dl-channel', json_encode(compact('vid')));
+            $key = 'youtube-vids-need-download';
+            Cache::put($key, array_unique(array_unshift(Cache::get($key), $vid)));
             return $data;
         }
         return null;
