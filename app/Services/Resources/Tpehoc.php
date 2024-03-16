@@ -866,7 +866,7 @@ final class Tpehoc{
                 ],
                 'addition'=>$addition,
             ];
-            
+            Redis::publish('youtube-dl-channel', json_encode(compact('vid')));
             return $data;
         }
         return null;
