@@ -19,9 +19,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/resources/{keyword}', function ($keyword){
+Route::get('/resources/{keyword}', function (Request $request, $keyword){
     $resource = app("App\Services\Resource");
-    return $resource->_invoke($keyword);
+    return $request->query()?$resource->_invoke($keyword . '?' . http_build_query($request->query())):$resource->_invoke($keyword);
 })->where('keyword', '.*');
 
 

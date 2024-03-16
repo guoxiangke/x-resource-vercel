@@ -82,5 +82,5 @@ Route::get('/youtube/{vid}/{qualityLabel}', function ($vid, $qualityLabel='all')
 
 Route::get('/resources/{keyword}', function ($keyword){
     $resource = app("App\Services\Resource");
-    return $resource->_invoke($keyword);
+    return $request->query()?$resource->_invoke($keyword . '?' . http_build_query($request->query())):$resource->_invoke($keyword);
 })->where('keyword', '.*');

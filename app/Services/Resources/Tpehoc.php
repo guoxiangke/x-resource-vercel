@@ -828,9 +828,6 @@ final class Tpehoc{
 
         // https://youtu.be/Y8X8JXNbBbI
         // https://www.youtube.com/watch?v=Y8X8JXNbBbI&list=RDwwpK3p4heEM&index=2
-        // dd($keyword,urlencode('?'));// ? => %3F
-        // $keyword = str_replace('?', "%3F", $keyword);
-        Log::error(__CLASS__,[$keyword]);
         if(preg_match('/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w\-]{11})/', $keyword, $matches)){
             $vid = $matches[1];
             $videoInfo = Youtube::getVideoInfo($vid);
@@ -857,7 +854,7 @@ final class Tpehoc{
                 "data"=> [
                     "url" => $mp3,
                     'title' => $title,
-                    'description' => '解析音频',
+                    'description' => '内容处理后,24小时后过期',
                 ],
                 'statistics' => [
                     'metric' => 'youtube',
