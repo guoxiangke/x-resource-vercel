@@ -15,6 +15,8 @@ use Tectalic\OpenAi\Authentication;
 // use Tectalic\OpenAi\Client;
 use Tectalic\OpenAi\Manager;
 use Tectalic\OpenAi\Models\Completions\CreateRequest;
+use Madcoda\Youtube\Facades\Youtube;
+use Illuminate\Support\Facades\Redis;
 final class Tpehoc{
 	public function _invoke($keyword)
 	{
@@ -826,12 +828,50 @@ final class Tpehoc{
 
         // https://youtu.be/Y8X8JXNbBbI
         // https://www.youtube.com/watch?v=Y8X8JXNbBbI&list=RDwwpK3p4heEM&index=2
+        // dd($keyword,urlencode('?'));// ? => %3F
+        // $keyword = str_replace('?', "%3F", $keyword);
         if(Str::startsWith($keyword, ['https://youtu.be/','https://www.youtube.com/watch?v='])){
-            $command = "/var/www/html/youtube-dl --no-playlist -J $keyword";
+            preg_match('/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w\-]{11})/', $keyword, $matches);
+            $vid = $matches[1];
+            $videoInfo = Youtube::getVideoInfo($vid);
+            $title = $videoInfo->snippet->title;
+            $mp4 = env('R2_SHARE')."/tmpshare/{$vid}.mp4";
+            $mp3 = env('R2_SHARE')."/tmpshare/{$vid}.m4a";
+            $image = "https://i.ytimg.com/vi/{$vid}/sddefault.jpg";
+            $addition = [
+                'type' => 'link',
+                "data"=> [
+                    "url" => $mp4,
+                    'title' => $title,
+                    'description' => '您请求的内容正在处理，5分钟后方可播放！',
+                    'image' => $image,
+                ],
+                'statistics' => [
+                    'metric' => 'youtube',
+                    "keyword" => $vid,
+                    "type" => 'audio',
+                ],
+            ];
+            $data = [
+                'type' => 'music',
+                "data"=> [
+                    "url" => $mp3,
+                    'title' => $title,
+                    'description' => '解析音频',
+                ],
+                'statistics' => [
+                    'metric' => 'youtube',
+                    "keyword" => $vid,
+                    "type" => 'audio',
+                ],
+                'addition'=>$addition,
+            ];
+            // Redis::publish('youtube-dl-channel', json_encode(compact('vid')));
+            return $data;
+            // $command = "/var/www/html/youtube-dl --no-playlist -J $keyword";
             // $command = "/usr/local/bin/youtube-dl --no-playlist -J $keyword";
-            $output = json_decode(shell_exec($command));
-
-            $title = $output->fulltitle;
+            // $output = json_decode(shell_exec($command));
+            
             foreach ($output->formats as $key => $format) {
                 if(in_array($format->format_id,[139,140,141])){
                     $mp3 = $format->url;
