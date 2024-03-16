@@ -867,7 +867,9 @@ final class Tpehoc{
                 'addition'=>$addition,
             ];
             $key = 'youtube-vids-need-download';
-            Cache::put($key, array_unique(array_unshift(Cache::get($key), $vid)));
+            $value = Cache::get($key,[]);
+            $value = array_unshift($value, $vid);
+            Cache::put($key, array_unique($value));
             return $data;
         }
         return null;
