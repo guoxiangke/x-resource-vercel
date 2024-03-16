@@ -866,45 +866,7 @@ final class Tpehoc{
                 ],
                 'addition'=>$addition,
             ];
-            // Redis::publish('youtube-dl-channel', json_encode(compact('vid')));
-            return $data;
-            // $command = "/var/www/html/youtube-dl --no-playlist -J $keyword";
-            // $command = "/usr/local/bin/youtube-dl --no-playlist -J $keyword";
-            // $output = json_decode(shell_exec($command));
             
-            foreach ($output->formats as $key => $format) {
-                if(in_array($format->format_id,[139,140,141])){
-                    $mp3 = $format->url;
-                }
-                if($format->format_id == 22){
-                    $mp4 = $format->url;
-                }
-            }
-            
-            // $mp4 = $output->formats[11]->url; //22 720p 18 360p 
-            $thumbnail = $output->thumbnail;
-            //https://i.ytimg.com/vi/T7SrzqlV9NY/maxresdefault.jpg
-
-            $addition = [
-                'type' => 'link',
-                "data"=> [
-                    "url" => $mp4,
-                    'title' => $title,
-                    'description' => '720P',
-                    'image' => $thumbnail,
-                ]
-            ];
-            $data = [
-                'type' => 'music',
-                "data"=> [
-                    "url" => $mp3,
-                    'title' => $title,
-                    'description' => '解析音频',
-                    // 'image' => $thumbnail,
-                ],
-                'addition'=>$addition,
-            ];
-            Log::error(__CLASS__,$data);
             return $data;
         }
         return null;
