@@ -11,6 +11,7 @@ use Illuminate\Support\Arr;
 use Madcoda\Youtube\Facades\Youtube;
 use App\Helpers\Helper;
 use YouTube\YouTubeDownloader;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
