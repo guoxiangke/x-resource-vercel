@@ -22,10 +22,10 @@ final class PastorLu{
             return $this->getByDate();
             $data = $this->_getData();
             $vid = $data['data']['vid'];
-            $data['data']['url'] = env('R2_DOMAIN')."/@pastorpaulqiankunlu618/".$vid.".mp4";
+            $data['data']['url'] = env('R2_SHARE')."/@pastorpaulqiankunlu618/".$vid.".mp4";
 
             // Add audio
-            $m4a = env('R2_DOMAIN')."/@pastorpaulqiankunlu618/".$vid.".m4a";
+            $m4a = env('R2_SHARE')."/@pastorpaulqiankunlu618/".$vid.".m4a";
             $addition = $data;
             $addition['type'] = 'music';
             $addition['data']['url']= $m4a;
@@ -53,10 +53,10 @@ final class PastorLu{
                 $data = $this->_getLastSundayData();
 
                 $vid = $data['data']['vid'];
-                $data['data']['url'] = env('R2_DOMAIN')."/@pastorpaulqiankunlu618/".$vid.".mp4";
+                $data['data']['url'] = env('R2_SHARE')."/@pastorpaulqiankunlu618/".$vid.".mp4";
 
                 // Add audio
-                $m4a = env('R2_DOMAIN')."/@pastorpaulqiankunlu618/".$vid.".m4a";
+                $m4a = env('R2_SHARE')."/@pastorpaulqiankunlu618/".$vid.".m4a";
                 $addition = $data;
                 $addition['type'] = 'music';
                 $addition['data']['url']= $m4a;
@@ -585,7 +585,7 @@ final class PastorLu{
         }
 
         $vid = $item['vid'];
-        $url = env('R2_DOMAIN')."/@pastorpaulqiankunlu618/".$vid.".mp4";
+        $url = env('R2_SHARE')."/@pastorpaulqiankunlu618/".$vid.".mp4";
         $image = 'https://share.simai.life/uPic/2023/Amn09V.jpg';
         $data = [
             'type' => 'link',
@@ -603,7 +603,7 @@ final class PastorLu{
             ]
         ];
 
-        $m4a = env('R2_DOMAIN')."/@pastorpaulqiankunlu618/".$vid.".m4a";
+        $m4a = env('R2_SHARE')."/@pastorpaulqiankunlu618/".$vid.".m4a";
         $addition = $data;
         $addition['type'] = 'music';
         $addition['data']['url']= $m4a;

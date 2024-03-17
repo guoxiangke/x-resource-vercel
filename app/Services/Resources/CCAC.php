@@ -29,7 +29,7 @@ final class CCAC{
             preg_match_all($re, $html, $matches);
 
             $vid = $matches[2][$offset];
-            $channelDomain = env('R2_DOMAIN')."/@cantoneseccac1966/";
+            $channelDomain = env('R2_SHARE')."/@cantoneseccac1966/";
             $url = $channelDomain.$vid.".mp4";
             $image = 'https://share.simai.life/uPic/2023/IeDDmx.jpg';
 
