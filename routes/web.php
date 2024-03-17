@@ -80,7 +80,7 @@ Route::get('/youtube/{vid}/{qualityLabel}', function ($vid, $qualityLabel='all')
     return $qualityLabel=='all'?$all:$allp[$qualityLabel]->url;
 })->whereIn('qualityLabel', ['all', '360p', '720p', '1080p']);;
 
-Route::get('/resources/{keyword}', function ($keyword){
+Route::get('/resources/{keyword}', function (Request $request, $keyword){
     $resource = app("App\Services\Resource");
     return $request->query()?$resource->_invoke($keyword . '?' . http_build_query($request->query())):$resource->_invoke($keyword);
 })->where('keyword', '.*');
