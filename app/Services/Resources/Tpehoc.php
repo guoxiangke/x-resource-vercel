@@ -840,7 +840,7 @@ final class Tpehoc{
                 "data"=> [
                     "url" => $mp4,
                     'title' => $title,
-                    'description' => '您请求的内容正在处理，5分钟后方可播放！',
+                    'description' => '24小时后过期',
                     'image' => $image,
                 ],
                 'statistics' => [
@@ -854,7 +854,7 @@ final class Tpehoc{
                 "data"=> [
                     "url" => $mp3,
                     'title' => $title,
-                    'description' => '内容处理后,24小时后过期',
+                    'description' => '5分钟后方可播放',
                 ],
                 'statistics' => [
                     'metric' => 'youtube',
