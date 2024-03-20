@@ -53,5 +53,54 @@ final class Kr{
                 "data"=> $data,
             ];
         }
+
+        if($keyword == 'rfi'){
+            $data = [
+                "url" => "https://rfienchinois64k.ice.infomaniak.ch/rfienchinois-64.mp3",
+                'title' => "【fri】News广播",
+                'description' => '广播News',
+            ];
+            return [
+                'type' => 'music',
+                "data"=> $data,
+            ];
+        }
+        if($keyword == 'cnn1'){
+            $data = [
+                "url" => "https://tunein.cdnstream1.com/3519_96.mp3",
+                'title' => "【cnn1】News广播",
+                'description' => '广播News',
+            ];
+            return [
+                'type' => 'music',
+                "data"=> $data,
+            ];
+        }
+
+        if($keyword == 'cnn2'){
+            $data = [
+                "url" => "https://tunein.cdnstream1.com/2868_96.mp3",
+                'title' => "【cnn2】News广播",
+                'description' => '广播News',
+            ];
+            return [
+                'type' => 'music',
+                "data"=> $data,
+            ];
+        }
+
+        if($keyword == 'npr'){
+            $data = [
+                "url" => "https://prod-52-201-196-36.amperwave.net/southerncalipr-kpccfmmp3-imc",
+                'title' => "【npr】LAist 89.3",
+                'description' => 'LAist 89.3 - Southern California Public Radio',
+            ];
+            return [
+                'type' => 'music',
+                "data"=> $data,
+            ];
+        }
+        
+        
     }
 }
