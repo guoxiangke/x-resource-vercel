@@ -163,7 +163,7 @@ final class Tpehoc{
             // $cacheKey = "xbot.keyword.".$keyword;
             // $data = Cache::store('redis')->get($cacheKey, false);
             // if(!$data){
-            $image = 'https://zgtai.com/wp-content/uploads/Luo/luo-36.jpg';
+                $image = 'https://zgtai.com/wp-content/uploads/Luo/luo-36.jpg';
                 $items=[
                     "教牧人员与十字架的道路 (2)",
                     "教牧人员与十字架的道路 (1)",
@@ -825,7 +825,58 @@ final class Tpehoc{
                 "data" => ['content'=>$data['choices'][0]['message']['content']],
             ];
         }
-
+        // http://www.jtoday.org/2024/02/espresso/
+        // 新媒体Espresso课程视频及讲义
+        if($keyword == '781'){
+            $items = [
+                "新媒体宣教Espresso 1：人人宣教",
+                "新媒体宣教Espresso 2：朋友圈是最大的禾场",
+                "新媒体宣教Espresso 3：去中心化",
+                "新媒体宣教Espresso 4：从善用到塑造",
+                "新媒体宣教Espresso 5：突破同温层",
+                "新媒体宣教Espresso 6：道成了肉身",
+                "新媒体宣教Espresso 7：信、望、爱",
+                "新媒体宣教Espresso 8：挑战与机会",
+                "新媒体宣教Espresso 9：高度处境化",
+                "新媒体宣教Espresso 10：标题党 蹭热点",
+                "新媒体宣教Espresso 11：用爱心说诚实话",
+                "新媒体宣教Espresso 12：宣教要成为一种生活方式",
+            ];
+            $index = now()->format('z') % 12;
+            $item = $items[$index];
+            $titles = explode('：', $item);
+            $mp4 = "http://www.jtoday.org/wp-content/uploads/2024/01/". str_replace(' ','-',$item) .".mp4";
+            $mp3 = "http://www.jtoday.org/wp-content/uploads/2022/08/mavmm0".str_pad($index+1, 2, "0", STR_PAD_LEFT).".mp3";
+             $addition = [
+                'type' => 'link',
+                "data"=> [
+                    "url" => $mp4,
+                    'title' => $titles[0],
+                    'description' => $titles[1],
+                    'image' => "http://www.jtoday.org/wp-content/uploads/2022/08/%E6%96%B0%E5%AA%92%E4%BD%93%E5%AE%A3%E6%95%99_wechat_lesson.png",
+                ],
+                'statistics' => [
+                    'metric' => 'jtoday',
+                    "keyword" => $keyword,
+                    "type" => 'video',
+                ],
+            ];
+            $data = [
+                'type' => 'music',
+                "data"=> [
+                    "url" => $mp3,
+                    'title' => $titles[0],
+                    'description' => $titles[1],
+                ],
+                'statistics' => [
+                    'metric' => 'jtoday',
+                    "keyword" => $keyword,
+                    "type" => 'audio',
+                ],
+                'addition'=>$addition,
+            ];
+            return $data;
+        }
         // https://youtu.be/Y8X8JXNbBbI
         // https://www.youtube.com/watch?v=Y8X8JXNbBbI&list=RDwwpK3p4heEM&index=2
         if(preg_match('/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w\-]{11})/', $keyword, $matches)){
