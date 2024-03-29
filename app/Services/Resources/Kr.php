@@ -54,6 +54,28 @@ final class Kr{
             ];
         }
 
+        if($keyword == '虎嗅'){
+            $result = Http::withHeaders([
+                'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:123.0) Gecko/20100101 Firefox/123.0',
+            ])->asForm()->post('https://moment-api.huxiu.com/web-v3/moment/feed',[
+                'type'=>'',
+                'last_id'=>'',
+                'platform'=>'www'
+            ])->json();
+            $text = '';
+            foreach ($result['data']['moment_list']['datalist'] as $arr) {
+                $textArray = explode('<br><br>', $arr['content']);
+                $text .=  $textArray[0] . "by {$arr['user_info']['username']} {$arr['format_time']} \n";
+            }
+            
+            return [
+                'type' => 'text',
+                "data"=> ['content'=>$text . "详情：https://www.huxiu.com/moment/"],
+            ];
+        }
+        
+
+
         if($keyword == 'rfi'){
             $data = [
                 "url" => "https://rfienchinois64k.ice.infomaniak.ch/rfienchinois-64.mp3",
@@ -100,6 +122,8 @@ final class Kr{
                 "data"=> $data,
             ];
         }
+        
+
         
         
     }
