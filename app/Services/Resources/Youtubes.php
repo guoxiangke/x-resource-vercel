@@ -5,7 +5,7 @@ namespace App\Services\Resources;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Cache;
 use Madcoda\Youtube\Facades\Youtube;
-final class Youtube{
+final class Youtubes{
     // https://youtu.be/Y8X8JXNbBbI
     // https://www.youtube.com/watch?v=Y8X8JXNbBbI&list=RDwwpK3p4heEM&index=2
     // https://www.youtube.com/embed/JHdB1dYAteA?si=b2G7vdIdVbNQzH4X
