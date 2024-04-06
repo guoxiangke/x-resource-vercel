@@ -877,49 +877,6 @@ final class Tpehoc{
             ];
             return $data;
         }
-        // https://youtu.be/Y8X8JXNbBbI
-        // https://www.youtube.com/watch?v=Y8X8JXNbBbI&list=RDwwpK3p4heEM&index=2
-        if(preg_match('/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w\-]{11})/', $keyword, $matches)){
-            $vid = $matches[1];
-            $videoInfo = Youtube::getVideoInfo($vid);
-            $title = $videoInfo->snippet->title;
-            $mp4 = env('R2_SHARE')."/tmpshare/{$vid}.mp4";
-            $mp3 = env('R2_SHARE')."/tmpshare/{$vid}.m4a";
-            $image = "https://i.ytimg.com/vi/{$vid}/sddefault.jpg";
-            $addition = [
-                'type' => 'link',
-                "data"=> [
-                    "url" => $mp4,
-                    'title' => $title,
-                    'description' => '24小时后过期',
-                    'image' => $image,
-                ],
-                'statistics' => [
-                    'metric' => 'youtube',
-                    "keyword" => $vid,
-                    "type" => 'audio',
-                ],
-            ];
-            $data = [
-                'type' => 'music',
-                "data"=> [
-                    "url" => $mp3,
-                    'title' => $title,
-                    'description' => '5分钟后方可播放',
-                ],
-                'statistics' => [
-                    'metric' => 'youtube',
-                    "keyword" => $vid,
-                    "type" => 'audio',
-                ],
-                'addition'=>$addition,
-            ];
-            $key = 'youtube-vids-need-download';
-            $value = Cache::get($key,[]);
-            array_unshift($value, $vid);
-            Cache::put($key, array_unique($value));
-            return $data;
-        }
         return null;
 	}
 }
