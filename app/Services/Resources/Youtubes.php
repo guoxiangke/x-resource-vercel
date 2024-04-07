@@ -19,8 +19,8 @@ final class Youtubes{
             $vid = $matches[1];
             $videoInfo = Youtube::getVideoInfo($vid);
             $title = $videoInfo->snippet->title;
-            $mp4 = env('R2_SHARE_AUDIO')."/tmpshare/{$vid}.mp4";
-            $mp3 = env('R2_SHARE_VIDEO')."/tmpshare/{$vid}.m4a";
+            $mp4 = env('R2_SHARE_VIDEO')."/tmpshare/{$vid}.mp4";
+            $mp3 = env('R2_SHARE_AUDIO')."/tmpshare/{$vid}.m4a";
             $image = "https://i.ytimg.com/vi/{$vid}/sddefault.jpg";
             $addition = [
                 'type' => 'link',
